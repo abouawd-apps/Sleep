@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ماذا يحدث لجسمك عندما لا تنام جيداً؟ | A Good Night's Sleep</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo for Arabic, Plus Jakarta Sans for English -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        night: {
+                            950: '#060814',
+                            900: '#0b1026',
+                            800: '#131b3a',
+                            700: '#1e2952',
+                        },
+                        dream: {
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                        }
+                    },
+                    fontFamily: {
+                        arabic: ['Cairo', 'sans-serif'],
+                        english: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Font Direction Handling */
+        html[dir="rtl"] body {
+            font-family: 'Cairo', sans-serif;
+        }
+        html[dir="ltr"] body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Smooth Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b1026;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 9999px;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        /* Custom Range Slider */
+        input[type=range] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            height: 8px;
+            border-radius: 999px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            background: #6366f1;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.7);
+            margin-top: -7px;
+            transition: transform 0.15s ease, background-color 0.15s ease;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.18);
+            background: #818cf8;
+        }
+
+        /* 3D Flip Card Utilities */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        /* Floating Animation */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float {
+            animation: floatSlow 5s ease-in-out infinite;
+        }
+
+        /* Breathing Circle Animation */
+        .breathing-circle {
+            transition: transform 1s linear, box-shadow 1s ease;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-night-950 dark:text-slate-100 transition-colors duration-500 min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white">
+
+    <!-- Background Starfield Canvas (Visible primarily in Dark Mode) -->
+    <canvas id="starfieldCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-0 dark:opacity-70 transition-opacity duration-700"></canvas>
+
+    <!-- Ambient Gradient Blobs -->
+    <div class="fixed top-[-10%] left-[-10%] w-96 h-96 bg-indigo-500/20 dark:bg-indigo-600/20 rounded-full blur-3xl pointer-events-none z-0"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-96 h-96 bg-purple-500/15 dark:bg-violet-600/20 rounded-full blur-3xl pointer-events-none z-0"></div>
+
+    <!-- Sticky Navigation Bar -->
+    <header class="sticky top-0 z-50 glass-card bg-white/80 dark:bg-night-900/80 border-b border-slate-200/80 dark:border-indigo-500/20 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3">
+            <!-- Brand Logo -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-amber-400 p-0.5 shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-white dark:bg-night-900 rounded-[14px] flex items-center justify-center">
+                        <i class="fa-solid fa-moon text-indigo-600 dark:text-amber-300 text-xl"></i>
+                    </div>
+                </div>
+                <div>
+                    <span id="navBrandTitle" class="font-extrabold text-base sm:text-lg tracking-tight block bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-300 dark:to-amber-200">
+                        نوم جيد طوال الليل
+                    </span>
+                    <span id="navBrandSub" class="text-xs text-slate-500 dark:text-slate-400 block">
+                        د. لورانس إبستين • جامعة هارفارد
+                    </span>
+                </div>
+            </a>
+
+            <!-- Desktop Quick Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-1 text-sm font-semibold">
+                <a href="#debt-section" data-i18n="navDebt" class="px-3 py-2 rounded-xl hover:bg-indigo-50 dark:hover:bg-white/5 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 transition">حاسبة ديون النوم</a>
+                <a href="#brain-section" data-i18n="navBrain" class="px-3 py-2 rounded-xl hover:bg-indigo-50 dark:hover:bg-white/5 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 transition">دماغك أثناء النوم</a>
+                <a href="#forces-section" data-i18n="navForces" class="px-3 py-2 rounded-xl hover:bg-indigo-50 dark:hover:bg-white/5 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 transition">قوتان تتحكمان بنومك</a>
+                <a href="#myths-section" data-i18n="navMyths" class="px-3 py-2 rounded-xl hover:bg-indigo-50 dark:hover:bg-white/5 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 transition">خرافات النوم</a>
+                <a href="#plan-section" data-i18n="navPlan" class="px-3 py-2 rounded-xl hover:bg-indigo-50 dark:hover:bg-white/5 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 transition">الخطة العملية (6 خطوات)</a>
+            </nav>
+
+            <!-- Controls: Language & Dark/Light Mode -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Language Toggle Button -->
+                <button id="langToggleBtn" onclick="toggleLanguage()" class="flex items-center gap-2 px-3.5 py-2 rounded-xl font-bold text-xs sm:text-sm bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-500/15 dark:hover:bg-indigo-500/25 text-indigo-700 dark:text-indigo-300 border border-indigo-200/60 dark:border-indigo-500/30 transition-all shadow-sm active:scale-95" title="Switch Language / تغيير اللغة">
+                    <i class="fa-solid fa-earth-americas text-indigo-500 dark:text-indigo-300"></i>
+                    <span id="langBtnText">English</span>
+                </button>
+
+                <!-- Theme Toggle Button -->
+                <button id="themeToggleBtn" onclick="toggleTheme()" class="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-700 text-slate-700 dark:text-amber-300 border border-slate-200 dark:border-slate-700 transition-all shadow-sm active:scale-95" aria-label="Toggle Theme">
+                    <i id="themeIcon" class="fa-solid fa-sun text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-24">
+
+        <!-- ================= HERO SECTION ================= -->
+        <section id="hero" class="pt-8 sm:pt-14">
+            <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-indigo-900 via-night-900 to-slate-900 text-white shadow-2xl border border-indigo-500/30 p-6 sm:p-10 lg:p-14">
+                <!-- Decorative Glow -->
+                <div class="absolute -top-24 -left-24 w-80 h-80 bg-indigo-500/30 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-24 -right-24 w-80 h-80 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    <!-- Text Column -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-200 text-xs sm:text-sm font-semibold">
+                            <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                            <span data-i18n="heroBadge">ملخص كتاب «نوم جيد طوال الليل» • كلية الطب بجامعة هارفارد</span>
+                        </div>
+
+                        <h1 data-i18n="heroTitle" class="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight text-white">
+                            ماذا يحدث لجسمك عندما لا تنام جيداً؟
+                        </h1>
+
+                        <p data-i18n="heroDesc" class="text-base sm:text-lg text-indigo-100/90 leading-relaxed max-w-2xl">
+                            هل استيقظت يوماً بعد ليلة نوم طويلة لكنك ما زلت تشعر بالتعب؟ يوضح الدكتور <strong class="text-amber-300">لورانس إبستين (Dr. Lawrence Epstein)</strong> في كتابه <em>"A Good Night's Sleep"</em> أن النوم ليس مجرد إغلاق للدماغ، بل هو عملية حيوية مذهلة تحدد صحة قلبك، ذاكرتك، وزنك، وطاقتك اليومية.
+                        </p>
+
+                        <!-- Core Quote Box -->
+                        <div class="p-4 sm:p-5 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-300/40 flex items-center justify-center shrink-0 text-amber-300 mt-0.5">
+                                <i class="fa-solid fa-quote-right"></i>
+                            </div>
+                            <div>
+                                <p data-i18n="heroQuote" class="font-bold text-base sm:text-lg text-amber-200">
+                                    "النوم ليس رفاهية، بل استثمار في صحتك وطاقتك وحياتك."
+                                </p>
+                                <span data-i18n="heroAuthor" class="text-xs text-indigo-200 mt-1 block">
+                                    — د. لورانس إبستين (كلية الطب بجامعة هارفارد) • استوديو أبو عوض
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- CTA Buttons -->
+                        <div class="flex flex-wrap items-center gap-4 pt-2">
+                            <a href="#debt-section" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm sm:text-base shadow-lg shadow-amber-500/25 flex items-center gap-2.5 transition transform hover:-translate-y-0.5">
+                                <i class="fa-solid fa-calculator"></i>
+                                <span data-i18n="heroBtnCalc">احسب ديون نومك الآن</span>
+                            </a>
+                            <a href="https://youtu.be/11Oq1aRQrMI" target="_blank" rel="noopener noreferrer" class="px-5 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-sm sm:text-base flex items-center gap-2.5 transition">
+                                <i class="fa-brands fa-youtube text-red-400 text-xl"></i>
+                                <span data-i18n="heroBtnVideo">مشاهدة الفيديو الأصلي</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Hero Card / Book & Video Overview -->
+                    <div class="lg:col-span-5">
+                        <div class="bg-night-800/90 border border-indigo-400/30 rounded-3xl p-6 shadow-2xl space-y-5 relative animate-float">
+                            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-amber-300 text-2xl">
+                                        <i class="fa-solid fa-book-medical"></i>
+                                    </div>
+                                    <div>
+                                        <h2 data-i18n="bookCardTitle" class="font-bold text-white text-base">A Good Night's Sleep</h2>
+                                        <p data-i18n="bookCardSub" class="text-xs text-indigo-300">نوم جيد طوال الليل • Harvard Health</p>
+                                    </div>
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+                                    7 - 8 <span data-i18n="hrsLabel">ساعات</span>
+                                </span>
+                            </div>
+
+                            <!-- Video Chapters Interactive Quick Jump -->
+                            <div class="space-y-2.5">
+                                <p data-i18n="chaptersHeading" class="text-xs font-bold uppercase tracking-wider text-indigo-300">
+                                    محاور الفيديو التفاعلية:
+                                </p>
+                                <a href="#brain-section" class="flex items-center justify-between p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-xs font-mono px-2 py-1 rounded bg-indigo-500/30 text-indigo-200">01:45</span>
+                                        <span data-i18n="chap1" class="text-sm font-semibold text-slate-100 group-hover:text-amber-300 transition">ماذا يحدث داخل دماغك أثناء النوم؟</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-left text-xs text-slate-400"></i>
+                                </a>
+                                <a href="#forces-section" class="flex items-center justify-between p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-xs font-mono px-2 py-1 rounded bg-indigo-500/30 text-indigo-200">02:44</span>
+                                        <span data-i18n="chap2" class="text-sm font-semibold text-slate-100 group-hover:text-amber-300 transition">من يتحكم في نومك؟ (القوتان)</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-left text-xs text-slate-400"></i>
+                                </a>
+                                <a href="#debt-section" class="flex items-center justify-between p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-xs font-mono px-2 py-1 rounded bg-indigo-500/30 text-indigo-200">03:26</span>
+                                        <span data-i18n="chap3" class="text-sm font-semibold text-slate-100 group-hover:text-amber-300 transition">خطورة نقص النوم وديون النوم</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-left text-xs text-slate-400"></i>
+                                </a>
+                                <a href="#myths-section" class="flex items-center justify-between p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-xs font-mono px-2 py-1 rounded bg-indigo-500/30 text-indigo-200">04:08</span>
+                                        <span data-i18n="chap4" class="text-sm font-semibold text-slate-100 group-hover:text-amber-300 transition">خرافات شائعة عن النوم</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-left text-xs text-slate-400"></i>
+                                </a>
+                                <a href="#plan-section" class="flex items-center justify-between p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition group">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-xs font-mono px-2 py-1 rounded bg-indigo-500/30 text-indigo-200">04:48</span>
+                                        <span data-i18n="chap5" class="text-sm font-semibold text-slate-100 group-hover:text-amber-300 transition">خطة عملية من 6 خطوات لنوم عميق</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-left text-xs text-slate-400"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 1: SLEEP DEBT CALCULATOR & RISK VISUALIZER ================= -->
+        <section id="debt-section" class="scroll-mt-24 space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 text-xs font-bold mb-2 border border-rose-500/20">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        <span data-i18n="debtTag">سؤال الفيديو [00:03:26] و [00:06:25]</span>
+                    </div>
+                    <h2 data-i18n="debtTitle" class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+                        كم ساعة تنام عادة في الليل؟ (حاسبة ديون النوم)
+                    </h2>
+                </div>
+                <p data-i18n="debtSubtitle" class="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-xl">
+                    يحتاج معظم البالغين بين <strong>7 إلى 8 ساعات</strong> من النوم يومياً. إذا نمت 5 ساعات فقط، فإنك تراكم "دين نوم" بمقدار ساعتين كل ليلة!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Sliders Control Panel -->
+                <div class="lg:col-span-5 bg-white dark:bg-night-900 rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-indigo-500/20 shadow-xl flex flex-col justify-between space-y-6">
+                    <div class="space-y-6">
+                        <h3 data-i18n="debtInputHeading" class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <i class="fa-solid fa-sliders text-indigo-500"></i>
+                            <span>اضبط عادات نومك الحالية</span>
+                        </h3>
+
+                        <!-- Weekday Sleep Slider -->
+                        <div class="space-y-2 p-4 rounded-2xl bg-slate-50 dark:bg-night-800/70 border border-slate-200/60 dark:border-white/5">
+                            <div class="flex justify-between items-center">
+                                <label for="weekdaySleep" data-i18n="weekdayLabel" class="text-sm font-bold text-slate-700 dark:text-slate-200">
+                                    ساعات النوم في أيام العمل/الدراسة (5 أيام)
+                                </label>
+                                <span class="px-3 py-1 rounded-lg bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 font-extrabold text-sm">
+                                    <span id="weekdayVal">5.5</span> <span data-i18n="hrsUnit">ساعات</span>
+                                </span>
+                            </div>
+                            <input id="weekdaySleep" type="range" min="3" max="10" step="0.5" value="5.5" oninput="updateSleepDebt()" class="w-full bg-slate-200 dark:bg-night-700 rounded-lg">
+                            <div class="flex justify-between text-[11px] text-slate-400">
+                                <span>3h</span>
+                                <span data-i18n="optimalRange">المثالي: 7-8h</span>
+                                <span>10h</span>
+                            </div>
+                        </div>
+
+                        <!-- Weekend Sleep Slider -->
+                        <div class="space-y-2 p-4 rounded-2xl bg-slate-50 dark:bg-night-800/70 border border-slate-200/60 dark:border-white/5">
+                            <div class="flex justify-between items-center">
+                                <label for="weekendSleep" data-i18n="weekendLabel" class="text-sm font-bold text-slate-700 dark:text-slate-200">
+                                    ساعات النوم في عطلة نهاية الأسبوع (يومان)
+                                </label>
+                                <span class="px-3 py-1 rounded-lg bg-purple-500/15 text-purple-600 dark:text-purple-300 font-extrabold text-sm">
+                                    <span id="weekendVal">7.5</span> <span data-i18n="hrsUnit">ساعات</span>
+                                </span>
+                            </div>
+                            <input id="weekendSleep" type="range" min="3" max="11" step="0.5" value="7.5" oninput="updateSleepDebt()" class="w-full bg-slate-200 dark:bg-night-700 rounded-lg">
+                            <div class="flex justify-between text-[11px] text-slate-400">
+                                <span>3h</span>
+                                <span data-i18n="optimalRange">المثالي: 7-8h</span>
+                                <span>11h</span>
+                            </div>
+                        </div>
+
+                        <!-- Recommended Target Preset Buttons -->
+                        <div class="space-y-2">
+                            <span data-i18n="presetLabel" class="text-xs font-semibold text-slate-500 dark:text-slate-400 block">
+                                سيناريوهات سريعة من الفيديو:
+                            </span>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button onclick="setSleepPreset(5, 6)" class="p-2.5 rounded-xl text-xs font-bold bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/20 transition">
+                                    <i class="fa-solid fa-battery-quarter block mb-1 text-sm"></i>
+                                    <span data-i18n="preset5h">نوم 5 ساعات</span>
+                                </button>
+                                <button onclick="setSleepPreset(6, 8)" class="p-2.5 rounded-xl text-xs font-bold bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-300 border border-amber-500/20 transition">
+                                    <i class="fa-solid fa-battery-half block mb-1 text-sm"></i>
+                                    <span data-i18n="preset6h">تعويض العطلة</span>
+                                </button>
+                                <button onclick="setSleepPreset(7.5, 7.5)" class="p-2.5 rounded-xl text-xs font-bold bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/20 transition">
+                                    <i class="fa-solid fa-battery-full block mb-1 text-sm"></i>
+                                    <span data-i18n="preset8h">النوم المثالي (7.5h)</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary Metrics Box -->
+                    <div class="grid grid-cols-2 gap-4 pt-2">
+                        <div class="p-4 rounded-2xl bg-gradient-to-br from-rose-500/10 to-orange-500/10 border border-rose-500/25 text-center">
+                            <span data-i18n="weeklyDebtLabel" class="text-xs font-bold text-slate-500 dark:text-slate-300 block">ديون النوم الأسبوعية</span>
+                            <span id="weeklyDebtValue" class="text-2xl sm:text-3xl font-black text-rose-600 dark:text-rose-400 mt-1 block">7.5</span>
+                            <span data-i18n="hoursPerWeek" class="text-[11px] text-slate-500 dark:text-slate-400">ساعة مفقودة / أسبوع</span>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/25 text-center">
+                            <span data-i18n="monthlyDebtLabel" class="text-xs font-bold text-slate-500 dark:text-slate-300 block">ديون النوم الشهرية</span>
+                            <span id="monthlyDebtValue" class="text-2xl sm:text-3xl font-black text-indigo-600 dark:text-indigo-300 mt-1 block">30</span>
+                            <span data-i18n="hoursPerMonth" class="text-[11px] text-slate-500 dark:text-slate-400">ساعة مفقودة / شهر</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Physiological & Cognitive Risk Visualizer -->
+                <div class="lg:col-span-7 bg-white dark:bg-night-900 rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-indigo-500/20 shadow-xl flex flex-col justify-between space-y-6">
+                    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 dark:border-white/10 pb-4">
+                        <div>
+                            <h3 data-i18n="riskHeading" class="text-lg font-bold text-slate-900 dark:text-white">
+                                تأثير نمط نومك الحالي على جسمك ودماغك
+                            </h3>
+                            <p id="debtVerdictText" class="text-xs sm:text-sm font-semibold text-amber-600 dark:text-amber-400 mt-0.5">
+                                تحذير: تراكم ديون النوم خلال الأسبوع يصعب جداً تعويضه في يوم العطلة!
+                            </p>
+                        </div>
+                        <div id="debtStatusBadge" class="px-4 py-1.5 rounded-full text-xs font-extrabold bg-rose-500/15 text-rose-600 dark:text-rose-300 border border-rose-500/30">
+                            خطر مرتفع
+                        </div>
+                    </div>
+
+                    <!-- 5 Risk Indicators from the Video -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Risk 1: Concentration -->
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-night-800/60 border border-slate-200/60 dark:border-white/5 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-9 h-9 rounded-xl bg-indigo-500/15 text-indigo-500 flex items-center justify-center">
+                                        <i class="fa-solid fa-brain"></i>
+                                    </div>
+                                    <span data-i18n="risk1Title" class="font-bold text-sm">ضعف التركيز والانتباه</span>
+                                </div>
+                                <span id="risk1Pct" class="text-xs font-extrabold text-rose-500">65%</span>
+                            </div>
+                            <div class="w-full h-2 bg-slate-200 dark:bg-night-700 rounded-full overflow-hidden">
+                                <div id="risk1Bar" class="h-full bg-gradient-to-r from-indigo-500 to-rose-500 rounded-full transition-all duration-500" style="width: 65%"></div>
+                            </div>
+                            <p data-i18n="risk1Desc" class="text-xs text-slate-500 dark:text-slate-400">
+                                تراجع القدرة على التعلم وحل المشكلات وتثبيت الذكريات.
+                            </p>
+                        </div>
+
+                        <!-- Risk 2: Irritability -->
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-night-800/60 border border-slate-200/60 dark:border-white/5 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-500 flex items-center justify-center">
+                                        <i class="fa-solid fa-face-tired"></i>
+                                    </div>
+                                    <span data-i18n="risk2Title" class="font-bold text-sm">العصبية وتقلب المزاج</span>
+                                </div>
+                                <span id="risk2Pct" class="text-xs font-extrabold text-amber-500">70%</span>
+                            </div>
+                            <div class="w-full h-2 bg-slate-200 dark:bg-night-700 rounded-full overflow-hidden">
+                                <div id="risk2Bar" class="h-full bg-gradient-to-r from-amber-400 to-orange-500 rounded-full transition-all duration-500" style="width: 70%"></div>
+                            </div>
+                            <p data-i18n="risk2Desc" class="text-xs text-slate-500 dark:text-slate-400">
+                                استجابة انفعالية سريعة، توتر مستمر، وشعور بالإرهاق الذهني.
+                            </p>
+                        </div>
+
+                        <!-- Risk 3: Weight Gain & Diabetes/Heart -->
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-night-800/60 border border-slate-200/60 dark:border-white/5 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-9 h-9 rounded-xl bg-rose-500/15 text-rose-500 flex items-center justify-center">
+                                        <i class="fa-solid fa-heart-pulse"></i>
+                                    </div>
+                                    <span data-i18n="risk3Title" class="font-bold text-sm">الوزن والسكري وأمراض القلب</span>
+                                </div>
+                                <span id="risk3Pct" class="text-xs font-extrabold text-rose-500">55%</span>
+                            </div>
+                            <div class="w-full h-2 bg-slate-200 dark:bg-night-700 rounded-full overflow-hidden">
+                                <div id="risk3Bar" class="h-full bg-gradient-to-r from-orange-500 to-rose-600 rounded-full transition-all duration-500" style="width: 55%"></div>
+                            </div>
+                            <p data-i18n="risk3Desc" class="text-xs text-slate-500 dark:text-slate-400">
+                                يرفع نقص النوم المزمن خطر السمنة، السكري، وأمراض القلب والأوعية.
+                            </p>
+                        </div>
+
+                        <!-- Risk 4: Microsleep & Driving Accidents -->
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-night-800/60 border border-slate-200/60 dark:border-white/5 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-9 h-9 rounded-xl bg-red-500/15 text-red-500 flex items-center justify-center">
+                                        <i class="fa-solid fa-car-burst"></i>
+                                    </div>
+                                    <span data-i18n="risk4Title" class="font-bold text-sm">الغفوات المفاجئة والحوادث</span>
+                                </div>
+                                <span id="risk4Pct" class="text-xs font-extrabold text-red-500">60%</span>
+                            </div>
+                            <div class="w-full h-2 bg-slate-200 dark:bg-night-700 rounded-full overflow-hidden">
+                                <div id="risk4Bar" class="h-full bg-gradient-to-r from-rose-500 to-red-600 rounded-full transition-all duration-500" style="width: 60%"></div>
+                            </div>
+                            <p data-i18n="risk4Desc" class="text-xs text-slate-500 dark:text-slate-400">
+                                غفوة لثوانٍ معدودة أثناء القيادة قد تؤدي إلى حوادث خطيرة جداً!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Doctor Insight Callout -->
+                    <div class="p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center gap-3.5">
+                        <i class="fa-solid fa-circle-info text-indigo-500 text-xl shrink-0"></i>
+                        <p id="debtAdviceBox" class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
+                            عندما تنام أقل من 7 ساعات يومياً، يتراكم "دين النوم" لدرجة أن النوم الإضافي في عطلة نهاية الأسبوع لا يكفي لإصلاح الأثر الحيوي بالكامل.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 2: INSIDE YOUR BRAIN DURING SLEEP ================= -->
+        <section id="brain-section" class="scroll-mt-24 space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-xs font-bold mb-2 border border-indigo-500/20">
+                        <i class="fa-solid fa-wave-square"></i>
+                        <span data-i18n="brainTag">مختبر الدماغ التفاعلي [00:01:45]</span>
+                    </div>
+                    <h2 data-i18n="brainTitle" class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+                        ماذا يحدث داخل دماغك أثناء النوم؟
+                    </h2>
+                </div>
+                <p data-i18n="brainSubtitle" class="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-xl">
+                    كان الاعتقاد قديماً أن النوم مجرد إغلاق للدماغ، لكن العلم الحديث أثبت أن الدماغ يكون في حالة نشاط مذهل!
+                </p>
+            </div>
+
+            <!-- Interactive Stage Switcher & Live Brainwave Canvas -->
+            <div class="bg-white dark:bg-night-900 rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-200/80 dark:border-indigo-500/20 shadow-xl space-y-8">
+                <!-- Mode Tabs -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 p-1.5 rounded-2xl bg-slate-100 dark:bg-night-800 border border-slate-200/60 dark:border-white/5">
+                    <button id="tabDeepSleep" onclick="selectBrainStage('deep')" class="py-3.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2.5 transition-all bg-indigo-600 text-white shadow-md">
+                        <i class="fa-solid fa-shield-heart"></i>
+                        <span data-i18n="stageDeepBtn">1. مرحلة النوم العميق (Deep Sleep)</span>
+                    </button>
+                    <button id="tabRemSleep" onclick="selectBrainStage('rem')" class="py-3.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2.5 transition-all text-slate-600 dark:text-slate-300 hover:bg-white/50 dark:hover:bg-white/5">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span data-i18n="stageRemBtn">2. مرحلة الأحلام (REM Sleep)</span>
+                    </button>
+                    <button id="tabOldMyth" onclick="selectBrainStage('myth')" class="py-3.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2.5 transition-all text-slate-600 dark:text-slate-300 hover:bg-white/50 dark:hover:bg-white/5">
+                        <i class="fa-solid fa-power-off"></i>
+                        <span data-i18n="stageMythBtn">الاعتقاد القديم الخاطئ</span>
+                    </button>
+                </div>
+
+                <!-- Dynamic Content + Animated Brainwave Monitor -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <!-- Left: Live EEG Brainwave Visualizer -->
+                    <div class="lg:col-span-6 space-y-3">
+                        <div class="relative rounded-2xl overflow-hidden bg-night-950 border border-indigo-500/30 p-4 shadow-inner">
+                            <div class="flex items-center justify-between text-xs text-indigo-300 mb-2 font-mono">
+                                <span id="eegLabel">EEG BRAINWAVE MONITOR • DELTA WAVES</span>
+                                <span class="flex items-center gap-1.5 text-emerald-400">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                                    LIVE
+                                </span>
+                            </div>
+                            <canvas id="brainWaveCanvas" class="w-full h-52 block rounded-xl bg-night-900/90"></canvas>
+                            <div class="mt-3 flex items-center justify-between text-xs text-slate-400">
+                                <span id="brainStageStatus">نشاط الصيانة الخلوية وإفراز هرمون النمو</span>
+                                <span id="brainFreqBadge" class="px-2.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-mono">0.5 - 4 Hz</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Stage Details & Functions -->
+                    <div class="lg:col-span-6 space-y-5">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 text-xs font-bold" id="stageBadge">
+                            ورشة الصيانة الجسدية الشاملة
+                        </div>
+                        <h3 id="stageTitle" class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+                            النوم العميق: عندما يُصلح الجسم نفسه
+                        </h3>
+                        <p id="stageDesc" class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                            في مرحلة النوم العميق، تتباطأ موجات الدماغ وتبدأ عملية ترميم شاملة لا تحدث أثناء اليقظة. بدون هذه المرحلة، تستيقظ بجسم منهك ومناعة ضعيفة مهما طالت ساعات بقائك في السرير.
+                        </p>
+
+                        <!-- 3 Key Pillars of the Selected Stage -->
+                        <div id="stagePillars" class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                            <!-- Dynamically populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 3: TWO FORCES CONTROLLING SLEEP SIMULATOR ================= -->
+        <section id="forces-section" class="scroll-mt-24 space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-bold mb-2 border border-amber-500/20">
+                        <i class="fa-solid fa-compass"></i>
+                        <span data-i18n="forcesTag">محاكي توازن النوم [00:02:44]</span>
+                    </div>
+                    <h2 data-i18n="forcesTitle" class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+                        من يتحكم في نومك؟ (الساعة البيولوجية × ضغط النوم)
+                    </h2>
+                </div>
+                <p data-i18n="forcesSubtitle" class="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-xl">
+                    تتحكم في نومك قوتان رئيسيتان: <strong>الساعة البيولوجية</strong> (تتأثر بالضوء والظلام) و<strong>ضغط النوم</strong> (يزداد كلما بقيت مستيقظاً).
+                </p>
+            </div>
+
+            <div class="bg-white dark:bg-night-900 rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-indigo-500/20 shadow-xl space-y-6">
+                <!-- Interactive Time Slider & Caffeine Toggle -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center bg-slate-50 dark:bg-night-800/70 p-5 rounded-2xl border border-slate-200/60 dark:border-white/5">
+                    <div class="lg:col-span-8 space-y-2">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <label for="timeOfDaySlider" class="text-sm font-bold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                                <i id="timeSkyIcon" class="fa-solid fa-moon text-amber-400 text-lg"></i>
+                                <span data-i18n="simTimeLabel">حرّك المؤشر عبر ساعات اليوم (من 7 صباحاً حتى 12 منتصف الليل):</span>
+                            </label>
+                            <span id="simClockDisplay" class="px-3.5 py-1 rounded-xl bg-indigo-600 text-white font-extrabold text-sm shadow">
+                                10:00 PM
+                            </span>
+                        </div>
+                        <input id="timeOfDaySlider" type="range" min="7" max="24" step="1" value="22" oninput="updateForcesSimulator()" class="w-full bg-slate-200 dark:bg-night-700 rounded-lg">
+                        <div class="flex justify-between text-[11px] text-slate-400 font-mono">
+                            <span>07:00 AM</span>
+                            <span>12:00 PM</span>
+                            <span>06:00 PM</span>
+                            <span>10:00 PM ★</span>
+                            <span>12:00 AM</span>
+                        </div>
+                    </div>
+
+                    <!-- Disruptor Toggle (Evening Caffeine / Screens) -->
+                    <div class="lg:col-span-4 flex flex-col justify-center border-t lg:border-t-0 lg:border-r lg:rtl:border-r lg:ltr:border-l border-slate-200 dark:border-white/10 pt-4 lg:pt-0 lg:px-5">
+                        <span data-i18n="disruptorLabel" class="text-xs font-bold text-slate-500 dark:text-slate-400 mb-2 block">
+                            جرّب تأثير مدمرات النوم مساءً:
+                        </span>
+                        <button id="caffeineToggleBtn" onclick="toggleCaffeineDisruption()" class="w-full py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm border border-slate-300 dark:border-slate-600 bg-white dark:bg-night-900 hover:border-amber-500 transition flex items-center justify-between">
+                            <span class="flex items-center gap-2">
+                                <i class="fa-solid fa-mug-hot text-amber-500"></i>
+                                <span data-i18n="caffeineBtnText">كافيين وشاشات قبل النوم</span>
+                            </span>
+                            <span id="caffeineStateBadge" class="px-2 py-0.5 rounded text-[11px] bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">OFF</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Live Dual-Force Curve Canvas + Status Cards -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    <div class="lg:col-span-7">
+                        <div class="rounded-2xl bg-night-950 p-4 border border-indigo-500/20">
+                            <div class="flex flex-wrap items-center justify-between gap-2 text-xs mb-3">
+                                <div class="flex items-center gap-4">
+                                    <span class="flex items-center gap-1.5 text-amber-300 font-bold">
+                                        <span class="w-3 h-3 rounded-full bg-amber-400 inline-block"></span>
+                                        <span data-i18n="legendClock">نشاط الساعة البيولوجية (اليقظة)</span>
+                                    </span>
+                                    <span class="flex items-center gap-1.5 text-indigo-300 font-bold">
+                                        <span class="w-3 h-3 rounded-full bg-indigo-400 inline-block"></span>
+                                        <span data-i18n="legendPressure">ضغط النوم المتراكم</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <canvas id="forcesCanvas" class="w-full h-56 block rounded-xl"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 space-y-4">
+                        <!-- Force 1 Meter -->
+                        <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-sm text-amber-700 dark:text-amber-300 flex items-center gap-2">
+                                    <i class="fa-solid fa-sun"></i>
+                                    <span data-i18n="force1Title">1. الساعة البيولوجية (الضوء والظلام)</span>
+                                </span>
+                                <span id="circadianStatusVal" class="text-xs font-extrabold px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-600 dark:text-amber-200">إشارة النوم</span>
+                            </div>
+                            <p id="circadianDesc" class="text-xs text-slate-600 dark:text-slate-300">
+                                في الظلام يفرز الدماغ الميلاتونين ليخبر جسمك أن وقت النوم قد حان.
+                            </p>
+                        </div>
+
+                        <!-- Force 2 Meter -->
+                        <div class="p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-sm text-indigo-700 dark:text-indigo-300 flex items-center gap-2">
+                                    <i class="fa-solid fa-hourglass-half"></i>
+                                    <span data-i18n="force2Title">2. ضغط النوم (ساعات الاستيقاظ)</span>
+                                </span>
+                                <span id="pressureStatusVal" class="text-xs font-extrabold px-2.5 py-0.5 rounded bg-indigo-500/20 text-indigo-600 dark:text-indigo-200">مرتفع (15 ساعة)</span>
+                            </div>
+                            <p id="pressureDesc" class="text-xs text-slate-600 dark:text-slate-300">
+                                يزداد ضغط النوم تدريجياً منذ لحظة استيقاظك صباحاً حتى يصل لذروته ليلاً.
+                            </p>
+                        </div>
+
+                        <!-- Alignment Verdict -->
+                        <div id="harmonyBox" class="p-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-800 dark:text-emerald-200">
+                            <div class="flex items-center gap-2 font-extrabold text-sm mb-1">
+                                <i class="fa-solid fa-sparkles"></i>
+                                <span id="harmonyTitle">التناغم المثالي للنوم العميق!</span>
+                            </div>
+                            <p id="harmonyDesc" class="text-xs leading-relaxed">
+                                عندما تعمل القوتان معاً (ظلام الليل + ضغط نوم مرتفع)، تحصل على نوم عميق ومريح بسهولة.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 4: SLEEP MYTHS VS FACTS (INTERACTIVE QUIZ & FLIP CARDS) ================= -->
+        <section id="myths-section" class="scroll-mt-24 space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-bold mb-2 border border-purple-500/20">
+                        <i class="fa-solid fa-circle-question"></i>
+                        <span data-i18n="mythsTag">اختبر معلوماتك [00:04:08]</span>
+                    </div>
+                    <h2 data-i18n="mythsTitle" class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+                        خرافات شائعة عن النوم: حقيقة أم خرافة؟
+                    </h2>
+                </div>
+                <p data-i18n="mythsSubtitle" class="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-xl">
+                    اضغط على <strong>"حقيقة"</strong> أو <strong>"خرافة"</strong> أو اقلب البطاقة لاكتشاف التفسير العلمي من كتاب الدكتور لورانس إبستين.
+                </p>
+            </div>
+
+            <!-- 3 Interactive Flip Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Myth Card 1 -->
+                <div class="perspective-1000 h-80">
+                    <div id="mythCard1" class="transform-style-3d relative w-full h-full">
+                        <!-- Front -->
+                        <div class="backface-hidden absolute inset-0 bg-white dark:bg-night-900 rounded-3xl p-6 border border-slate-200/80 dark:border-indigo-500/25 shadow-xl flex flex-col justify-between">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/10 text-indigo-600 dark:text-indigo-300" data-i18n="mythBadge1">الاعتقاد الأول #1</span>
+                                    <i class="fa-solid fa-person-cane text-2xl text-indigo-400"></i>
+                                </div>
+                                <h3 data-i18n="myth1Question" class="text-xl font-extrabold text-slate-900 dark:text-white leading-snug">
+                                    «كبار السن يحتاجون إلى ساعات نوم أقل من الشباب»
+                                </h3>
+                                <p data-i18n="mythPrompt" class="text-xs text-slate-500 dark:text-slate-400">
+                                    ما رأيك؟ اختر إجابتك لتكشف الحقيقة العلمية:
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button onclick="answerMyth(1, true)" class="py-2.5 rounded-xl font-bold text-sm bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/25 transition">
+                                    <i class="fa-solid fa-check mx-1"></i> <span data-i18n="btnTrue">حقيقة</span>
+                                </button>
+                                <button onclick="answerMyth(1, false)" class="py-2.5 rounded-xl font-bold text-sm bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/25 transition">
+                                    <i class="fa-solid fa-xmark mx-1"></i> <span data-i18n="btnMyth">خرافة</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Back -->
+                        <div class="backface-hidden rotate-y-180 absolute inset-0 bg-gradient-to-br from-indigo-900 to-night-900 text-white rounded-3xl p-6 border border-indigo-400/40 shadow-xl flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span id="myth1ResultBadge" class="px-3 py-1 rounded-full text-xs font-extrabold bg-rose-500/25 text-rose-200 border border-rose-400/30">
+                                        خرافة خاطئة!
+                                    </span>
+                                    <button onclick="flipMythBack(1)" class="text-xs text-indigo-300 hover:text-white flex items-center gap-1">
+                                        <i class="fa-solid fa-rotate-left"></i> <span data-i18n="btnFlipBack">عودة</span>
+                                    </button>
+                                </div>
+                                <h4 data-i18n="myth1FactTitle" class="text-lg font-extrabold text-amber-300">
+                                    الحاجة للنوم لا تقل مع التقدم في العمر!
+                                </h4>
+                                <p data-i18n="myth1FactDesc" class="text-xs sm:text-sm text-indigo-100 leading-relaxed">
+                                    كبار السن يحتاجون لنفس عدد ساعات النوم (7-8 ساعات)، لكن ما يتغير هو أن <strong>جودة النوم تصبح أسوأ</strong> وأكثر تقطعاً، فيظن الناس خطأً أنهم لا يحتاجون للنوم.
+                                </p>
+                            </div>
+                            <div class="text-[11px] text-indigo-300 font-mono">[00:04:12] A Good Night's Sleep</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Myth Card 2 -->
+                <div class="perspective-1000 h-80">
+                    <div id="mythCard2" class="transform-style-3d relative w-full h-full">
+                        <!-- Front -->
+                        <div class="backface-hidden absolute inset-0 bg-white dark:bg-night-900 rounded-3xl p-6 border border-slate-200/80 dark:border-indigo-500/25 shadow-xl flex flex-col justify-between">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/10 text-purple-600 dark:text-purple-300" data-i18n="mythBadge2">الاعتقاد الثاني #2</span>
+                                    <i class="fa-solid fa-wine-glass-empty text-2xl text-purple-400"></i>
+                                </div>
+                                <h3 data-i18n="myth2Question" class="text-xl font-extrabold text-slate-900 dark:text-white leading-snug">
+                                    «الكحول والمهدئات تساعدك على الحصول على نوم جيد ومريح»
+                                </h3>
+                                <p data-i18n="mythPrompt" class="text-xs text-slate-500 dark:text-slate-400">
+                                    ما رأيك؟ اختر إجابتك لتكشف الحقيقة العلمية:
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button onclick="answerMyth(2, true)" class="py-2.5 rounded-xl font-bold text-sm bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/25 transition">
+                                    <i class="fa-solid fa-check mx-1"></i> <span data-i18n="btnTrue">حقيقة</span>
+                                </button>
+                                <button onclick="answerMyth(2, false)" class="py-2.5 rounded-xl font-bold text-sm bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/25 transition">
+                                    <i class="fa-solid fa-xmark mx-1"></i> <span data-i18n="btnMyth">خرافة</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Back -->
+                        <div class="backface-hidden rotate-y-180 absolute inset-0 bg-gradient-to-br from-purple-900 to-night-900 text-white rounded-3xl p-6 border border-purple-400/40 shadow-xl flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span id="myth2ResultBadge" class="px-3 py-1 rounded-full text-xs font-extrabold bg-rose-500/25 text-rose-200 border border-rose-400/30">
+                                        خرافة خاطئة!
+                                    </span>
+                                    <button onclick="flipMythBack(2)" class="text-xs text-purple-300 hover:text-white flex items-center gap-1">
+                                        <i class="fa-solid fa-rotate-left"></i> <span data-i18n="btnFlipBack">عودة</span>
+                                    </button>
+                                </div>
+                                <h4 data-i18n="myth2FactTitle" class="text-lg font-extrabold text-amber-300">
+                                    يدمر النوم العميق ويجعلك تستيقظ متعباً!
+                                </h4>
+                                <p data-i18n="myth2FactDesc" class="text-xs sm:text-sm text-purple-100 leading-relaxed">
+                                    قد يجعلك الكحول تغفو بسرعة في البداية، لكنه <strong>يدمر بنية النوم العميق</strong> ويسبب تقطع النوم ليلاً، فتستيقظ في الصباح أكثر إرهاقاً وتعباً.
+                                </p>
+                            </div>
+                            <div class="text-[11px] text-purple-300 font-mono">[00:04:22] A Good Night's Sleep</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Myth Card 3 -->
+                <div class="perspective-1000 h-80">
+                    <div id="mythCard3" class="transform-style-3d relative w-full h-full">
+                        <!-- Front -->
+                        <div class="backface-hidden absolute inset-0 bg-white dark:bg-night-900 rounded-3xl p-6 border border-slate-200/80 dark:border-indigo-500/25 shadow-xl flex flex-col justify-between">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-rose-500/10 text-rose-600 dark:text-rose-300" data-i18n="mythBadge3">الاعتقاد الثالث #3</span>
+                                    <i class="fa-solid fa-lungs text-2xl text-rose-400"></i>
+                                </div>
+                                <h3 data-i18n="myth3Question" class="text-xl font-extrabold text-slate-900 dark:text-white leading-snug">
+                                    «الغطيط (الشخير) أثناء النوم هو مجرد صوت مزعج وطبيعي»
+                                </h3>
+                                <p data-i18n="mythPrompt" class="text-xs text-slate-500 dark:text-slate-400">
+                                    ما رأيك؟ اختر إجابتك لتكشف الحقيقة العلمية:
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button onclick="answerMyth(3, true)" class="py-2.5 rounded-xl font-bold text-sm bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/25 transition">
+                                    <i class="fa-solid fa-check mx-1"></i> <span data-i18n="btnTrue">حقيقة</span>
+                                </button>
+                                <button onclick="answerMyth(3, false)" class="py-2.5 rounded-xl font-bold text-sm bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/25 transition">
+                                    <i class="fa-solid fa-xmark mx-1"></i> <span data-i18n="btnMyth">خرافة</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Back -->
+                        <div class="backface-hidden rotate-y-180 absolute inset-0 bg-gradient-to-br from-rose-900 to-night-900 text-white rounded-3xl p-6 border border-rose-400/40 shadow-xl flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span id="myth3ResultBadge" class="px-3 py-1 rounded-full text-xs font-extrabold bg-rose-500/25 text-rose-200 border border-rose-400/30">
+                                        خرافة خطيرة!
+                                    </span>
+                                    <button onclick="flipMythBack(3)" class="text-xs text-rose-300 hover:text-white flex items-center gap-1">
+                                        <i class="fa-solid fa-rotate-left"></i> <span data-i18n="btnFlipBack">عودة</span>
+                                    </button>
+                                </div>
+                                <h4 data-i18n="myth3FactTitle" class="text-lg font-extrabold text-amber-300">
+                                    قد يكون علامة على انقطاع التنفس أثناء النوم!
+                                </h4>
+                                <p data-i18n="myth3FactDesc" class="text-xs sm:text-sm text-rose-100 leading-relaxed">
+                                    الغطيط (الشخير) المرتفع قد يكون مؤشراً على حالة طبية خطيرة تسمى <strong>انقطاع التنفس أثناء النوم (Sleep Apnea)</strong>، وهي ترفع خطر أمراض القلب والضغط وتستلزم استشارة طبية.
+                                </p>
+                            </div>
+                            <div class="text-[11px] text-rose-300 font-mono">[00:04:33] A Good Night's Sleep</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 5: 6-STEP PRACTICAL SLEEP PLAN & TRACKER ================= -->
+        <section id="plan-section" class="scroll-mt-24 space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold mb-2 border border-emerald-500/20">
+                        <i class="fa-solid fa-list-check"></i>
+                        <span data-i18n="planTag">خطة هارفارد العملية [00:04:48]</span>
+                    </div>
+                    <h2 data-i18n="planTitle" class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+                        كيف تنام جيداً فعلاً؟ (مقياس جاهزية النوم من 6 خطوات)
+                    </h2>
+                </div>
+                <p data-i18n="planSubtitle" class="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-xl">
+                    حدد الخطوات التي تطبقها في يومك لقياس <strong>نسبة جاهزية نومك الليلة</strong> والحصول على تقييم فوري.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- 6 Interactive Checklist Cards -->
+                <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Step 1 -->
+                    <div onclick="toggleStep(1)" id="stepCard1" class="cursor-pointer group p-5 rounded-2xl bg-white dark:bg-night-900 border-2 border-indigo-500 bg-indigo-50/30 dark:bg-indigo-950/30 shadow-md transition-all select-none">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div id="stepCheck1" class="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-sm transition">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400" data-i18n="step1Num">الخطوة الأولى #1</span>
+                            </div>
+                            <i class="fa-solid fa-crown text-amber-400 text-lg"></i>
+                        </div>
+                        <h3 data-i18n="step1Title" class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white mt-3">
+                            اجعل النوم أولوية قصوى
+                        </h3>
+                        <p data-i18n="step1Desc" class="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                            لا تتعامل مع النوم كوقت ضائع أو رفاهية، بل كركيزة أساسية لصحتك وإنتاجيتك.
+                        </p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div onclick="toggleStep(2)" id="stepCard2" class="cursor-pointer group p-5 rounded-2xl bg-white dark:bg-night-900 border-2 border-indigo-500 bg-indigo-50/30 dark:bg-indigo-950/30 shadow-md transition-all select-none">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div id="stepCheck2" class="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-sm transition">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400" data-i18n="step2Num">الخطوة الثانية #2</span>
+                            </div>
+                            <i class="fa-solid fa-person-running text-emerald-400 text-lg"></i>
+                        </div>
+                        <h3 data-i18n="step2Title" class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white mt-3">
+                            مارس الرياضة بانتظام
+                        </h3>
+                        <p data-i18n="step2Desc" class="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                            النشاط البدني خلال النهار يعمّق النوم ليلاً ويزيد من كفاءة ضغط النوم الطبيعي.
+                        </p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div onclick="toggleStep(3)" id="stepCard3" class="cursor-pointer group p-5 rounded-2xl bg-white dark:bg-night-900 border-2 border-slate-200 dark:border-white/10 shadow-md transition-all select-none">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div id="stepCheck3" class="w-7 h-7 rounded-lg bg-slate-200 dark:bg-night-700 text-transparent flex items-center justify-center font-bold text-sm transition">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400" data-i18n="step3Num">الخطوة الثالثة #3</span>
+                            </div>
+                            <i class="fa-solid fa-calendar-check text-indigo-400 text-lg"></i>
+                        </div>
+                        <h3 data-i18n="step3Title" class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white mt-3">
+                            حافظ على مواعيد نوم ثابتة
+                        </h3>
+                        <p data-i18n="step3Desc" class="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                            استيقظ ونم في نفس الموعد يومياً حتى في عطلة نهاية الأسبوع لضبط ساعتك البيولوجية.
+                        </p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div onclick="toggleStep(4)" id="stepCard4" class="cursor-pointer group p-5 rounded-2xl bg-white dark:bg-night-900 border-2 border-slate-200 dark:border-white/10 shadow-md transition-all select-none">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div id="stepCheck4" class="w-7 h-7 rounded-lg bg-slate-200 dark:bg-night-700 text-transparent flex items-center justify-center font-bold text-sm transition">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400" data-i18n="step4Num">الخطوة الرابعة #4</span>
+                            </div>
+                            <i class="fa-solid fa-book-open-reader text-purple-400 text-lg"></i>
+                        </div>
+                        <h3 data-i18n="step4Title" class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white mt-3">
+                            اصنع روتيناً هادئاً قبل النوم
+                        </h3>
+                        <p data-i18n="step4Desc" class="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                            خصص 30 دقيقة قبل النوم للقراءة الهادئة أو التنفس العميق والاسترخاء بعيداً عن التوتر.
+                        </p>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div onclick="toggleStep(5)" id="stepCard5" class="cursor-pointer group p-5 rounded-2xl bg-white dark:bg-night-900 border-2 border-slate-200 dark:border-white/10 shadow-md transition-all select-none">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div id="stepCheck5" class="w-7 h-7 rounded-lg bg-slate-200 dark:bg-night-700 text-transparent flex items-center justify-center font-bold text-sm transition">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400" data-i18n="step5Num">الخطوة الخامسة #5</span>
+                            </div>
+                            <i class="fa-solid fa-bed text-sky-400 text-lg"></i>
+                        </div>
+                        <h3 data-i18n="step5Title" class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white mt-3">
+                            اجعل غرفة نومك مثالية
+                        </h3>
+                        <p data-i18n="step5Desc" class="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                            بيئة مظلمة تماماً، هادئة، باردة قليلاً، مع سرير ووسادة مريحة مخصصة للنوم فقط.
+                        </p>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div onclick="toggleStep(6)" id="stepCard6" class="cursor-pointer group p-5 rounded-2xl bg-white dark:bg-night-900 border-2 border-slate-200 dark:border-white/10 shadow-md transition-all select-none">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div id="stepCheck6" class="w-7 h-7 rounded-lg bg-slate-200 dark:bg-night-700 text-transparent flex items-center justify-center font-bold text-sm transition">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400" data-i18n="step6Num">الخطوة السادسة #6</span>
+                            </div>
+                            <i class="fa-solid fa-ban text-rose-400 text-lg"></i>
+                        </div>
+                        <h3 data-i18n="step6Title" class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white mt-3">
+                            ابتعد عن مدمرات النوم الثلاثة
+                        </h3>
+                        <p data-i18n="step6Desc" class="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                            تجنب الكافيين في المساء، الوجبات الثقيلة المتأخرة، وإضاءة الشاشات والهواتف قبل النوم.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Sleep Readiness Score & Wind-Down Breathing Tool -->
+                <div class="lg:col-span-4 bg-white dark:bg-night-900 rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-indigo-500/25 shadow-xl space-y-6">
+                    <div class="text-center space-y-2">
+                        <h3 data-i18n="scoreCardTitle" class="font-extrabold text-lg text-slate-900 dark:text-white">
+                            مؤشر جاهزية النوم الليلة
+                        </h3>
+                        <div class="relative w-36 h-36 mx-auto flex items-center justify-center">
+                            <svg class="w-full h-full -rotate-90" viewBox="0 0 120 120">
+                                <circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" stroke-width="10" class="text-slate-100 dark:text-night-800"></circle>
+                                <circle id="scoreRingCircle" cx="60" cy="60" r="50" fill="none" stroke="#6366f1" stroke-width="10" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="209" class="transition-all duration-700"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span id="readinessScoreVal" class="text-3xl font-black text-indigo-600 dark:text-indigo-300">33%</span>
+                                <span id="readinessStepsCount" class="text-xs font-bold text-slate-400">2 / 6</span>
+                            </div>
+                        </div>
+                        <p id="readinessFeedback" class="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300">
+                            بداية جيدة! فعّل بقية الخطوات لتحصل على نوم عميق ومثالي الليلة.
+                        </p>
+                    </div>
+
+                    <button onclick="checkAllSteps()" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-indigo-500/20 transition">
+                        <i class="fa-solid fa-check-double mx-1"></i>
+                        <span data-i18n="btnCheckAll">تحديد جميع الخطوات الـ 6 (التزام كامل)</span>
+                    </button>
+
+                    <!-- Interactive Guided Wind-Down Breathing (Applies Step 4) -->
+                    <div class="pt-4 border-t border-slate-200 dark:border-white/10 text-center space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span data-i18n="breathToolTitle" class="text-xs font-bold text-indigo-600 dark:text-indigo-300">
+                                <i class="fa-solid fa-wind mx-1"></i> تمرين استرخاء قبل النوم (الخطوة 4)
+                            </span>
+                            <button id="breathBtn" onclick="toggleBreathingExercise()" class="px-3 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-600 dark:text-emerald-300 text-xs font-bold transition">
+                                <span id="breathBtnText">ابدأ التنفس</span>
+                            </button>
+                        </div>
+
+                        <div class="py-4 flex flex-col items-center justify-center">
+                            <div id="breathOrb" class="breathing-circle w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs shadow-lg shadow-indigo-500/30">
+                                <span id="breathPhaseText">جاهز</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER & MANDATORY SIGNATURE ================= -->
+    <footer class="relative z-10 border-t border-slate-200 dark:border-indigo-500/20 bg-white/90 dark:bg-night-900/90 backdrop-blur-xl py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center space-y-5">
+            <!-- Core Message -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-amber-300 text-xs sm:text-sm font-bold border border-indigo-500/20">
+                <i class="fa-solid fa-star"></i>
+                <span data-i18n="footerTakeaway">تذكّر دائماً: النوم ليس رفاهية، بل استثمار في صحتك وطاقتك وحياتك</span>
+            </div>
+
+            <!-- Source Reference -->
+            <p data-i18n="footerSource" class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-2xl">
+                مبني على محتوى فيديو <a href="https://youtu.be/11Oq1aRQrMI" target="_blank" rel="noopener noreferrer" class="text-indigo-500 hover:underline font-bold">«ماذا يحدث لجسمك عندما لا تنام جيداً؟»</a> من قناة Abouawd Studio، الملخص لكتاب <em>A Good Night's Sleep</em> للدكتور لورانس إبستين (كلية الطب بجامعة هارفارد).
+            </p>
+
+            <!-- Mandatory Signature Box -->
+            <div class="w-full max-w-xl p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-indigo-600/10 via-purple-600/10 to-amber-500/10 border border-indigo-500/30 shadow-inner">
+                <p class="text-base sm:text-lg font-black bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-amber-500 dark:from-indigo-300 dark:via-purple-300 dark:to-amber-300">
+                    تصميم محمد عوض خير بمساعدة Gemini 4 Argon
+                </p>
+                <p id="footerSigEnglish" class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium hidden">
+                    Designed by Mohamed Awad Khair with the help of Gemini 4 Argon
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= JAVASCRIPT LOGIC & BILINGUAL DICTIONARY ================= -->
+    <script>
+        // Application State
+        let currentLang = 'ar';
+        let isDarkMode = true;
+        let currentBrainStage = 'deep';
+        let caffeineDisrupted = false;
+        let completedSteps = new Set([1, 2]);
+        let breathingInterval = null;
+        let isBreathing = false;
+
+        // Complete Bilingual Dictionary (Arabic & English)
+        const i18n = {
+            ar: {
+                navBrandTitle: "نوم جيد طوال الليل",
+                navBrandSub: "د. لورانس إبستين • جامعة هارفارد",
+                navDebt: "حاسبة ديون النوم",
+                navBrain: "دماغك أثناء النوم",
+                navForces: "قوتان تتحكمان بنومك",
+                navMyths: "خرافات النوم",
+                navPlan: "الخطة العملية (6 خطوات)",
+                langBtnText: "English",
+                heroBadge: "ملخص كتاب «نوم جيد طوال الليل» • كلية الطب بجامعة هارفارد",
+                heroTitle: "ماذا يحدث لجسمك عندما لا تنام جيداً؟",
+                heroDesc: "هل استيقظت يوماً بعد ليلة نوم طويلة لكنك ما زلت تشعر بالتعب؟ يوضح الدكتور <strong class='text-amber-300'>لورانس إبستين (Dr. Lawrence Epstein)</strong> في كتابه <em>'A Good Night's Sleep'</em> أن النوم ليس مجرد إغلاق للدماغ، بل هو عملية حيوية مذهلة تحدد صحة قلبك، ذاكرتك، وزنك، وطاقتك اليومية.",
+                heroQuote: "\"النوم ليس رفاهية، بل استثمار في صحتك وطاقتك وحياتك.\"",
+                heroAuthor: "— د. لورانس إبستين (كلية الطب بجامعة هارفارد) • استوديو أبو عوض",
+                heroBtnCalc: "احسب ديون نومك الآن",
+                heroBtnVideo: "مشاهدة الفيديو الأصلي",
+                bookCardTitle: "A Good Night's Sleep",
+                bookCardSub: "نوم جيد طوال الليل • Harvard Health",
+                hrsLabel: "ساعات",
+                chaptersHeading: "محاور الفيديو التفاعلية:",
+                chap1: "ماذا يحدث داخل دماغك أثناء النوم؟",
+                chap2: "من يتحكم في نومك؟ (القوتان)",
+                chap3: "خطورة نقص النوم وديون النوم",
+                chap4: "خرافات شائعة عن النوم",
+                chap5: "خطة عملية من 6 خطوات لنوم عميق",
+                debtTag: "سؤال الفيديو [00:03:26] و [00:06:25]",
+                debtTitle: "كم ساعة تنام عادة في الليل؟ (حاسبة ديون النوم)",
+                debtSubtitle: "يحتاج معظم البالغين بين <strong>7 إلى 8 ساعات</strong> من النوم يومياً. إذا نمت 5 ساعات فقط، فإنك تراكم \"دين نوم\" بمقدار ساعتين كل ليلة!",
+                debtInputHeading: "اضبط عادات نومك الحالية",
+                weekdayLabel: "ساعات النوم في أيام العمل/الدراسة (5 أيام)",
+                weekendLabel: "ساعات النوم في عطلة نهاية الأسبوع (يومان)",
+                hrsUnit: "ساعات",
+                optimalRange: "المثالي: 7-8h",
+                presetLabel: "سيناريوهات سريعة من الفيديو:",
+                preset5h: "نوم 5 ساعات",
+                preset6h: "تعويض العطلة",
+                preset8h: "النوم المثالي (7.5h)",
+                weeklyDebtLabel: "ديون النوم الأسبوعية",
+                hoursPerWeek: "ساعة مفقودة / أسبوع",
+                monthlyDebtLabel: "ديون النوم الشهرية",
+                hoursPerMonth: "ساعة مفقودة / شهر",
+                riskHeading: "تأثير نمط نومك الحالي على جسمك ودماغك",
+                risk1Title: "ضعف التركيز والانتباه",
+                risk1Desc: "تراجع القدرة على التعلم وحل المشكلات وتثبيت الذكريات.",
+                risk2Title: "العصبية وتقلب المزاج",
+                risk2Desc: "استجابة انفعالية سريعة، توتر مستمر، وشعور بالإرهاق الذهني.",
+                risk3Title: "الوزن والسكري وأمراض القلب",
+                risk3Desc: "يرفع نقص النوم المزمن خطر السمنة، السكري، وأمراض القلب والأوعية.",
+                risk4Title: "الغفوات المفاجئة والحوادث",
+                risk4Desc: "غفوة لثوانٍ معدودة أثناء القيادة قد تؤدي إلى حوادث خطيرة جداً!",
+                brainTag: "مختبر الدماغ التفاعلي [00:01:45]",
+                brainTitle: "ماذا يحدث داخل دماغك أثناء النوم؟",
+                brainSubtitle: "كان الاعتقاد قديماً أن النوم مجرد إغلاق للدماغ، لكن العلم الحديث أثبت أن الدماغ يكون في حالة نشاط مذهل!",
+                stageDeepBtn: "1. مرحلة النوم العميق (Deep Sleep)",
+                stageRemBtn: "2. مرحلة الأحلام (REM Sleep)",
+                stageMythBtn: "الاعتقاد القديم الخاطئ",
+                forcesTag: "محاكي توازن النوم [00:02:44]",
+                forcesTitle: "من يتحكم في نومك؟ (الساعة البيولوجية × ضغط النوم)",
+                forcesSubtitle: "تتحكم في نومك قوتان رئيسيتان: <strong>الساعة البيولوجية</strong> (تتأثر بالضوء والظلام) و<strong>ضغط النوم</strong> (يزداد كلما بقيت مستيقظاً).",
+                simTimeLabel: "حرّك المؤشر عبر ساعات اليوم (من 7 صباحاً حتى 12 منتصف الليل):",
+                disruptorLabel: "جرّب تأثير مدمرات النوم مساءً:",
+                caffeineBtnText: "كافيين وشاشات قبل النوم",
+                legendClock: "نشاط الساعة البيولوجية (اليقظة)",
+                legendPressure: "ضغط النوم المتراكم",
+                force1Title: "1. الساعة البيولوجية (الضوء والظلام)",
+                force2Title: "2. ضغط النوم (ساعات الاستيقاظ)",
+                mythsTag: "اختبر معلوماتك [00:04:08]",
+                mythsTitle: "خرافات شائعة عن النوم: حقيقة أم خرافة؟",
+                mythsSubtitle: "اضغط على <strong>«حقيقة»</strong> أو <strong>«خرافة»</strong> لاكتشاف التفسير العلمي من كتاب الدكتور لورانس إبستين.",
+                mythBadge1: "الاعتقاد الأول #1",
+                myth1Question: "«كبار السن يحتاجون إلى ساعات نوم أقل من الشباب»",
+                myth1FactTitle: "الحاجة للنوم لا تقل مع التقدم في العمر!",
+                myth1FactDesc: "كبار السن يحتاجون لنفس عدد ساعات النوم (7-8 ساعات)، لكن ما يتغير هو أن <strong>جودة النوم تصبح أسوأ</strong> وأكثر تقطعاً، فيظن الناس خطأً أنهم لا يحتاجون للنوم.",
+                mythBadge2: "الاعتقاد الثاني #2",
+                myth2Question: "«الكحول والمهدئات تساعدك على الحصول على نوم جيد ومريح»",
+                myth2FactTitle: "يدمر النوم العميق ويجعلك تستيقظ متعباً!",
+                myth2FactDesc: "قد يجعلك الكحول تغفو بسرعة في البداية، لكنه <strong>يدمر بنية النوم العميق</strong> ويسبب تقطع النوم ليلاً، فتستيقظ في الصباح أكثر إرهاقاً وتعباً.",
+                mythBadge3: "الاعتقاد الثالث #3",
+                myth3Question: "«الغطيط (الشخير) أثناء النوم هو مجرد صوت مزعج وطبيعي»",
+                myth3FactTitle: "قد يكون علامة على انقطاع التنفس أثناء النوم!",
+                myth3FactDesc: "الغطيط (الشخير) المرتفع قد يكون مؤشراً على حالة طبية خطيرة تسمى <strong>انقطاع التنفس أثناء النوم (Sleep Apnea)</strong>، وهي ترفع خطر أمراض القلب والضغط وتستلزم استشارة طبية.",
+                mythPrompt: "ما رأيك؟ اختر إجابتك لتكشف الحقيقة العلمية:",
+                btnTrue: "حقيقة",
+                btnMyth: "خرافة",
+                btnFlipBack: "عودة",
+                planTag: "خطة هارفارد العملية [00:04:48]",
+                planTitle: "كيف تنام جيداً فعلاً؟ (مقياس جاهزية النوم من 6 خطوات)",
+                planSubtitle: "حدد الخطوات التي تطبقها في يومك لقياس <strong>نسبة جاهزية نومك الليلة</strong> والحصول على تقييم فوري.",
+                step1Num: "الخطوة الأولى #1",
+                step1Title: "اجعل النوم أولوية قصوى",
+                step1Desc: "لا تتعامل مع النوم كوقت ضائع أو رفاهية، بل كركيزة أساسية لصحتك وإنتاجيتك.",
+                step2Num: "الخطوة الثانية #2",
+                step2Title: "مارس الرياضة بانتظام",
+                step2Desc: "النشاط البدني خلال النهار يعمّق النوم ليلاً ويزيد من كفاءة ضغط النوم الطبيعي.",
+                step3Num: "الخطوة الثالثة #3",
+                step3Title: "حافظ على مواعيد نوم ثابتة",
+                step3Desc: "استيقظ ونم في نفس الموعد يومياً حتى في عطلة نهاية الأسبوع لضبط ساعتك البيولوجية.",
+                step4Num: "الخطوة الرابعة #4",
+                step4Title: "اصنع روتيناً هادئاً قبل النوم",
+                step4Desc: "خصص 30 دقيقة قبل النوم للقراءة الهادئة أو التنفس العميق والاسترخاء بعيداً عن التوتر.",
+                step5Num: "الخطوة الخامسة #5",
+                step5Title: "اجعل غرفة نومك مثالية",
+                step5Desc: "بيئة مظلمة تماماً، هادئة، باردة قليلاً، مع سرير ووسادة مريحة مخصصة للنوم فقط.",
+                step6Num: "الخطوة السادسة #6",
+                step6Title: "ابتعد عن مدمرات النوم الثلاثة",
+                step6Desc: "تجنب الكافيين في المساء، الوجبات الثقيلة المتأخرة، وإضاءة الشاشات والهواتف قبل النوم.",
+                scoreCardTitle: "مؤشر جاهزية النوم الليلة",
+                btnCheckAll: "تحديد جميع الخطوات الـ 6 (التزام كامل)",
+                breathToolTitle: "تمرين استرخاء قبل النوم (الخطوة 4)",
+                footerTakeaway: "تذكّر دائماً: النوم ليس رفاهية، بل استثمار في صحتك وطاقتك وحياتك",
+                footerSource: "مبني على محتوى فيديو <a href='https://youtu.be/11Oq1aRQrMI' target='_blank' class='text-indigo-500 hover:underline font-bold'>«ماذا يحدث لجسمك عندما لا تنام جيداً؟»</a> من قناة Abouawd Studio، الملخص لكتاب <em>A Good Night's Sleep</em> للدكتور لورانس إبستين (كلية الطب بجامعة هارفارد)."
+            },
+            en: {
+                navBrandTitle: "A Good Night's Sleep",
+                navBrandSub: "Dr. Lawrence Epstein • Harvard Medical School",
+                navDebt: "Sleep Debt Calculator",
+                navBrain: "Your Brain Asleep",
+                navForces: "Two Sleep Forces",
+                navMyths: "Sleep Myths",
+                navPlan: "6-Step Sleep Plan",
+                langBtnText: "العربية",
+                heroBadge: "Book Summary: 'A Good Night's Sleep' • Harvard Medical School",
+                heroTitle: "What Happens to Your Body When You Don't Sleep Well?",
+                heroDesc: "Have you ever woken up after a long night's sleep still feeling exhausted? In his book <em>'A Good Night's Sleep'</em>, <strong class='text-amber-300'>Dr. Lawrence Epstein</strong> explains that sleep is not a passive brain shutdown—it is an active biological process vital for your heart, memory, weight, and daily energy.",
+                heroQuote: "\"Sleep is not a luxury; it is an investment in your health, your energy, and your life.\"",
+                heroAuthor: "— Dr. Lawrence Epstein (Harvard Medical School) • Abouawd Studio",
+                heroBtnCalc: "Calculate Your Sleep Debt",
+                heroBtnVideo: "Watch Original Video",
+                bookCardTitle: "A Good Night's Sleep",
+                bookCardSub: "Harvard Medical School Guide",
+                hrsLabel: "Hours",
+                chaptersHeading: "Interactive Video Chapters:",
+                chap1: "What Happens Inside Your Brain During Sleep?",
+                chap2: "Who Controls Your Sleep? (The 2 Forces)",
+                chap3: "Dangers of Sleep Deprivation & Sleep Debt",
+                chap4: "3 Common Sleep Myths Debunked",
+                chap5: "Practical 6-Step Plan for Deep Sleep",
+                debtTag: "Video Question [00:03:26] & [00:06:25]",
+                debtTitle: "How Many Hours Do You Usually Sleep? (Sleep Debt Calculator)",
+                debtSubtitle: "Most adults need <strong>7 to 8 hours</strong> of sleep every night. If you sleep only 5 hours, you accumulate 2 hours of 'Sleep Debt' every single night!",
+                debtInputHeading: "Adjust Your Current Sleep Schedule",
+                weekdayLabel: "Weekday Sleep Hours (5 Days/Week)",
+                weekendLabel: "Weekend Sleep Hours (2 Days/Week)",
+                hrsUnit: "hrs",
+                optimalRange: "Optimal: 7-8h",
+                presetLabel: "Quick Video Scenarios:",
+                preset5h: "5 Hours/Night",
+                preset6h: "Weekend Catch-up",
+                preset8h: "Ideal Sleep (7.5h)",
+                weeklyDebtLabel: "Weekly Sleep Debt",
+                hoursPerWeek: "lost hours / week",
+                monthlyDebtLabel: "Monthly Sleep Debt",
+                hoursPerMonth: "lost hours / month",
+                riskHeading: "How Your Current Sleep Schedule Impacts Your Body & Brain",
+                risk1Title: "Poor Focus & Memory",
+                risk1Desc: "Reduced ability to concentrate, learn new skills, and consolidate memories.",
+                risk2Title: "Irritability & Mood Swings",
+                risk2Desc: "Heightened emotional reactivity, stress, and persistent mental fatigue.",
+                risk3Title: "Weight, Diabetes & Heart Risk",
+                risk3Desc: "Chronic sleep loss increases risk of obesity, type 2 diabetes, and heart disease.",
+                risk4Title: "Microsleeps & Driving Accidents",
+                risk4Desc: "Nodding off for just a few seconds while driving can cause fatal accidents!",
+                brainTag: "Interactive Brain Lab [00:01:45]",
+                brainTitle: "What Happens Inside Your Brain During Sleep?",
+                brainSubtitle: "People used to think sleep was simply turning off the brain, but modern science proves the brain is remarkably active while you sleep!",
+                stageDeepBtn: "1. Deep Sleep Stage",
+                stageRemBtn: "2. Dream Stage (REM Sleep)",
+                stageMythBtn: "The Old Outdated Myth",
+                forcesTag: "Two-Process Sleep Simulator [00:02:44]",
+                forcesTitle: "Who Controls Your Sleep? (Biological Clock × Sleep Pressure)",
+                forcesSubtitle: "Two main forces govern your sleep: your <strong>Biological Clock</strong> (responds to light & darkness) and <strong>Sleep Pressure</strong> (builds the longer you stay awake).",
+                simTimeLabel: "Slide across the day (from 7:00 AM to 12:00 Midnight):",
+                disruptorLabel: "Test Evening Sleep Destroyers:",
+                caffeineBtnText: "Late Caffeine & Screens",
+                legendClock: "Biological Clock Alertness",
+                legendPressure: "Accumulated Sleep Pressure",
+                force1Title: "1. Biological Clock (Light & Darkness)",
+                force2Title: "2. Sleep Pressure (Time Awake)",
+                mythsTag: "Test Your Knowledge [00:04:08]",
+                mythsTitle: "Common Sleep Myths: Fact or Myth?",
+                mythsSubtitle: "Click <strong>'Fact'</strong> or <strong>'Myth'</strong> on each card to reveal the scientific truth from Dr. Lawrence Epstein's book.",
+                mythBadge1: "Common Belief #1",
+                myth1Question: "\"Older adults need fewer hours of sleep than younger adults\"",
+                myth1FactTitle: "Sleep need does NOT decrease with age!",
+                myth1FactDesc: "Older adults still require 7–8 hours of sleep, but their <strong>sleep quality often worsens</strong> and becomes more fragmented, making people mistakenly think they need less sleep.",
+                mythBadge2: "Common Belief #2",
+                myth2Question: "\"Alcohol helps you get a good, restful night's sleep\"",
+                myth2FactTitle: "It destroys Deep Sleep and leaves you exhausted!",
+                myth2FactDesc: "While alcohol may make you fall asleep faster initially, it <strong>destroys deep sleep architecture</strong> and fragments your night so you wake up even more tired.",
+                mythBadge3: "Common Belief #3",
+                myth3Question: "\"Loud snoring at night is just a harmless, annoying sound\"",
+                myth3FactTitle: "It can be a warning sign of Sleep Apnea!",
+                myth3FactDesc: "Loud snoring can indicate a dangerous disorder called <strong>Sleep Apnea</strong> (breathing interruptions during sleep), which strains the heart and requires medical care.",
+                mythPrompt: "What do you think? Choose an answer to flip the card:",
+                btnTrue: "Fact",
+                btnMyth: "Myth",
+                btnFlipBack: "Flip Back",
+                planTag: "Harvard Practical Plan [00:04:48]",
+                planTitle: "How to Actually Sleep Well? (6-Step Readiness Tracker)",
+                planSubtitle: "Check off the habits you practice today to calculate your <strong>Tonight's Sleep Readiness Score</strong>.",
+                step1Num: "Step #1",
+                step1Title: "Make Sleep a Top Priority",
+                step1Desc: "Stop treating sleep as wasted time or a luxury; view it as a pillar of health.",
+                step2Num: "Step #2",
+                step2Title: "Exercise Regularly",
+                step2Desc: "Regular daytime physical activity deepens nightly sleep and boosts natural sleep drive.",
+                step3Num: "Step #3",
+                step3Title: "Keep a Consistent Schedule",
+                step3Desc: "Wake up and go to bed at the same time every day—even on weekends!",
+                step4Num: "Step #4",
+                step4Title: "Create a Calm Bedtime Routine",
+                step4Desc: "Spend 30 minutes winding down with reading or deep relaxation before bed.",
+                step5Num: "Step #5",
+                step5Title: "Make Your Bedroom Ideal",
+                step5Desc: "Keep your bedroom dark, quiet, slightly cool, and reserve your bed for sleep.",
+                step6Num: "Step #6",
+                step6Title: "Avoid the 3 Sleep Destroyers",
+                step6Desc: "Avoid evening caffeine, heavy late meals, and bright screens before bedtime.",
+                scoreCardTitle: "Tonight's Sleep Readiness Score",
+                btnCheckAll: "Check All 6 Steps (Full Commitment)",
+                breathToolTitle: "Pre-Sleep Relaxation Pacer (Step 4)",
+                footerTakeaway: "Always Remember: Sleep is not a luxury, it is an investment in your health, energy, and life",
+                footerSource: "Based on the video <a href='https://youtu.be/11Oq1aRQrMI' target='_blank' class='text-indigo-500 hover:underline font-bold'>'What Happens to Your Body When You Don't Sleep Well?'</a> by Abouawd Studio, summarizing <em>A Good Night's Sleep</em> by Dr. Lawrence Epstein (Harvard Medical School)."
+            }
+        };
+
+        // Brain Stages Data (Bilingual)
+        const brainStagesData = {
+            deep: {
+                ar: {
+                    eeg: "مراقب موجات الدماغ • موجات دلتا العميقة (DELTA)",
+                    status: "نشاط الصيانة الخلوية وإفراز هرمون النمو",
+                    freq: "0.5 - 4 Hz (موجات بطيئة وعميقة)",
+                    badge: "المرحلة الأولى في الفيديو • الصيانة الجسدية",
+                    title: "النوم العميق (Deep Sleep): عندما يُصلح الجسم نفسه",
+                    desc: "خلال النوم العميق، يعمل جسمك كفريق صيانة متكامل؛ يقوم بإصلاح الأنسجة التالفة، تجديد الخلايا، وإفراز هرمون النمو الضروري لتجديد القوة البدنية والمناعة.",
+                    pillars: [
+                        { icon: "fa-screwdriver-wrench", title: "إصلاح الجسم لنفسه", text: "ترميم العضلات والأنسجة المستهلكة طوال النهار." },
+                        { icon: "fa-dna", title: "تجديد الخلايا", text: "بناء خلايا جديدة وتنقية الدماغ من السموم المتراكمة." },
+                        { icon: "fa-seedling", title: "إفراز هرمون النمو", text: "إطلاق هرمون النمو الحيوي لتجديد الطاقة والمناعة." }
+                    ]
+                },
+                en: {
+                    eeg: "EEG BRAINWAVE MONITOR • DEEP DELTA WAVES",
+                    status: "Cellular Repair & Growth Hormone Secretion Active",
+                    freq: "0.5 - 4 Hz (Slow Deep Waves)",
+                    badge: "Stage 1 in Video • Physical Restoration",
+                    title: "Deep Sleep: When Your Body Repairs Itself",
+                    desc: "During Deep Sleep, your body acts as a biological repair crew—mending tissues, regenerating cells, and releasing growth hormone essential for physical recovery and immunity.",
+                    pillars: [
+                        { icon: "fa-screwdriver-wrench", title: "Body Self-Repair", text: "Restores muscles and tissues worn down during the day." },
+                        { icon: "fa-dna", title: "Cell Regeneration", text: "Builds fresh cells and clears metabolic waste from the brain." },
+                        { icon: "fa-seedling", title: "Growth Hormone", text: "Secretes vital growth hormone to rebuild vitality and immunity." }
+                    ]
+                }
+            },
+            rem: {
+                ar: {
+                    eeg: "مراقب موجات الدماغ • نشاط مرحلة الأحلام (REM)",
+                    status: "ترتيب الذكريات وتثبيت المعلومات والتعلم",
+                    freq: "15 - 30 Hz (نشاط ذهني مكثف)",
+                    badge: "المرحلة الثانية في الفيديو • الصيانة الذهنية",
+                    title: "مرحلة الأحلام (REM Sleep): مهندس الذاكرة والتعلم",
+                    desc: "في مرحلة حركة العين السريعة (REM)، ينشط الدماغ بشدة ليقوم بفرز أحداث اليوم، ترتيب الذكريات، تثبيت المعلومات الجديدة، وتسهيل عملية التعلم والابتكار.",
+                    pillars: [
+                        { icon: "fa-folder-tree", title: "ترتيب الذكريات", text: "تنظيم الخبرات اليومية وربطها بالذكريات السابقة." },
+                        { icon: "fa-hard-drive", title: "تثبيت المعلومات", text: "نقل المعلومات المهمة من الذاكرة المؤقتة إلى طويلة المدى." },
+                        { icon: "fa-graduation-cap", title: "تسهيل التعلم", text: "تعزيز المهارات الذهنية والقدرة على الفهم والاستيعاب." }
+                    ]
+                },
+                en: {
+                    eeg: "EEG BRAINWAVE MONITOR • REM DREAM ACTIVITY",
+                    status: "Memory Organization, Consolidation & Learning",
+                    freq: "15 - 30 Hz (High Neural Activity)",
+                    badge: "Stage 2 in Video • Cognitive Upgrade",
+                    title: "REM Sleep (Dream Stage): Architect of Memory & Learning",
+                    desc: "During Rapid Eye Movement (REM) sleep, your brain lights up with activity—organizing daily experiences, consolidating information, and supercharging learning.",
+                    pillars: [
+                        { icon: "fa-folder-tree", title: "Organizing Memories", text: "Sorts daily experiences and links them to existing knowledge." },
+                        { icon: "fa-hard-drive", title: "Consolidating Info", text: "Transfers key lessons from short-term to long-term memory." },
+                        { icon: "fa-graduation-cap", title: "Facilitating Learning", text: "Sharpens cognitive skills, creativity, and problem solving." }
+                    ]
+                }
+            },
+            myth: {
+                ar: {
+                    eeg: "الاعتقاد القديم الخاطئ • خمول تام؟ (خرافة)",
+                    status: "اعتقاد خاطئ بأن الدماغ ينطفئ تماماً عند النوم",
+                    freq: "خرافة قديمة نفاهـا العلم",
+                    badge: "مقارنة علمية • لماذا ننام؟",
+                    title: "الاعتقاد القديم: «النوم مجرد إغلاق للدماغ»",
+                    desc: "كان الناس قديماً يظنون أن النوم حالة سلبية يتوقف فيها الدماغ عن العمل. أثبت الدكتور لورانس إبستين وأبحاث هارفارد أن العكس تماماً هو الصحيح: الدماغ يعمل بجدّ لإنقاذ صحتك!",
+                    pillars: [
+                        { icon: "fa-xmark", title: "ليس وقتاً ضائعاً", text: "اختصار ساعات النوم لا يمنحك وقتاً إضافياً بل يسرق طاقتك." },
+                        { icon: "fa-bolt", title: "نشاط عصبي مذهل", text: "بعض مناطق الدماغ تكون أكثر نشاطاً أثناء النوم منها في اليقظة." },
+                        { icon: "fa-heart-circle-check", title: "ضرورة للحياة", text: "جودة نومك تحدد جودة يقظتك وصحتك النفسية والجسدية." }
+                    ]
+                },
+                en: {
+                    eeg: "OUTDATED MYTH • PASSIVE SHUTDOWN? (FALSE)",
+                    status: "False belief that the brain simply turns off at night",
+                    freq: "Debunked by Modern Neuroscience",
+                    badge: "Scientific Comparison • Why We Sleep",
+                    title: "The Old Myth: 'Sleep is Just Turning Off the Brain'",
+                    desc: "For centuries, people assumed sleep was passive downtime. Dr. Lawrence Epstein and Harvard researchers proved the exact opposite: your brain works intensely all night to protect your life!",
+                    pillars: [
+                        { icon: "fa-xmark", title: "Not Wasted Time", text: "Cutting sleep doesn't give you more time—it drains your performance." },
+                        { icon: "fa-bolt", title: "Amazing Brain Activity", text: "Parts of your brain are even more active asleep than when awake." },
+                        { icon: "fa-heart-circle-check", title: "Vital Necessity", text: "How well you sleep tonight determines how well you live tomorrow." }
+                    ]
+                }
+            }
+        };
+
+        // ================= LANGUAGE & THEME TOGGLES =================
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            const htmlEl = document.documentElement;
+            htmlEl.lang = currentLang;
+            htmlEl.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+
+            // Update all static data-i18n elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[currentLang][key]) {
+                    el.innerHTML = i18n[currentLang][key];
+                }
+            });
+
+            // Update Brand & Language Button
+            document.getElementById('navBrandTitle').textContent = i18n[currentLang].navBrandTitle;
+            document.getElementById('navBrandSub').textContent = i18n[currentLang].navBrandSub;
+            document.getElementById('langBtnText').textContent = i18n[currentLang].langBtnText;
+
+            // Show English signature line alongside Arabic when in English mode
+            const sigEn = document.getElementById('footerSigEnglish');
+            if (currentLang === 'en') {
+                sigEn.classList.remove('hidden');
+            } else {
+                sigEn.classList.add('hidden');
+            }
+
+            // Re-render all dynamic interactive components
+            updateSleepDebt();
+            selectBrainStage(currentBrainStage);
+            updateForcesSimulator();
+            updateReadinessScore();
+            updateBreathingLabels();
+        }
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            const htmlEl = document.documentElement;
+            const icon = document.getElementById('themeIcon');
+            if (isDarkMode) {
+                htmlEl.classList.add('dark');
+                icon.className = 'fa-solid fa-sun text-lg';
+            } else {
+                htmlEl.classList.remove('dark');
+                icon.className = 'fa-solid fa-moon text-lg';
+            }
+            updateForcesSimulator();
+        }
+
+        // ================= 1. SLEEP DEBT CALCULATOR LOGIC =================
+        function setSleepPreset(weekday, weekend) {
+            document.getElementById('weekdaySleep').value = weekday;
+            document.getElementById('weekendSleep').value = weekend;
+            updateSleepDebt();
+        }
+
+        function updateSleepDebt() {
+            const weekday = parseFloat(document.getElementById('weekdaySleep').value);
+            const weekend = parseFloat(document.getElementById('weekendSleep').value);
+            const target = 7.5; // Recommended 7-8 hours average
+
+            document.getElementById('weekdayVal').textContent = weekday;
+            document.getElementById('weekendVal').textContent = weekend;
+
+            // Weekly sleep debt calculation
+            const weekdayDebt = Math.max(0, (target - weekday) * 5);
+            const weekendDiff = target - weekend; // negative if sleeping extra on weekend
+            const netWeeklyDebt = Math.max(0, +(weekdayDebt + weekendDiff * 2).toFixed(1));
+            const monthlyDebt = Math.round(netWeeklyDebt * 4.3);
+
+            document.getElementById('weeklyDebtValue').textContent = netWeeklyDebt;
+            document.getElementById('monthlyDebtValue').textContent = monthlyDebt;
+
+            // Calculate physiological risk percentages based on debt severity
+            const severity = Math.min(100, Math.round((weekdayDebt / 15) * 85 + (netWeeklyDebt / 15) * 15));
+            const r1 = Math.min(98, Math.max(8, Math.round(severity * 0.95)));
+            const r2 = Math.min(98, Math.max(10, Math.round(severity * 1.02)));
+            const r3 = Math.min(95, Math.max(6, Math.round(severity * 0.85)));
+            const r4 = Math.min(96, Math.max(5, Math.round(severity * 0.90)));
+
+            const updateBar = (idx, val) => {
+                document.getElementById(`risk${idx}Pct`).textContent = val + '%';
+                document.getElementById(`risk${idx}Bar`).style.width = val + '%';
+            };
+            updateBar(1, r1);
+            updateBar(2, r2);
+            updateBar(3, r3);
+            updateBar(4, r4);
+
+            // Verdict & Status Badge
+            const badge = document.getElementById('debtStatusBadge');
+            const verdict = document.getElementById('debtVerdictText');
+            const advice = document.getElementById('debtAdviceBox');
+
+            if (netWeeklyDebt <= 1.5 && weekday >= 7) {
+                badge.className = "px-4 py-1.5 rounded-full text-xs font-extrabold bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30";
+                badge.textContent = currentLang === 'ar' ? "نوم صحي ومثالي ✓" : "Healthy & Optimal ✓";
+                verdict.className = "text-xs sm:text-sm font-semibold text-emerald-600 dark:text-emerald-400 mt-0.5";
+                verdict.textContent = currentLang === 'ar'
+                    ? "ممتاز! أنت تمنح جسمك ودماغك القدر الكافي (7-8 ساعات) للصيانة اليومية."
+                    : "Excellent! You are giving your body and brain the recommended 7–8 hours for full nightly repair.";
+                advice.textContent = currentLang === 'ar'
+                    ? "الالتزام بـ 7 إلى 8 ساعات يومياً يحمي قلبك، يقوي ذاكرتك، ويمنحك تركيزاً عالياً طوال النهار."
+                    : "Consistently getting 7–8 hours protects your heart, sharpens memory, and keeps your daytime focus at its peak.";
+            } else if (netWeeklyDebt <= 6) {
+                badge.className = "px-4 py-1.5 rounded-full text-xs font-extrabold bg-amber-500/15 text-amber-600 dark:text-amber-300 border border-amber-500/30";
+                badge.textContent = currentLang === 'ar' ? "ديون نوم متوسطة ⚠" : "Moderate Sleep Debt ⚠";
+                verdict.className = "text-xs sm:text-sm font-semibold text-amber-600 dark:text-amber-400 mt-0.5";
+                verdict.textContent = currentLang === 'ar'
+                    ? "انتبه: لديك عجز في ساعات النوم يؤثر تدريجياً على تركيزك ومزاجك."
+                    : "Caution: You have a sleep deficit that gradually impairs your focus, mood, and metabolism.";
+                advice.textContent = currentLang === 'ar'
+                    ? "يوضح الفيديو أن محاولة تعويض كل ديون النوم في عطلة نهاية الأسبوع فقط لا تكفي لإعادة ضبط ساعتك البيولوجية."
+                    : "As explained in the video, trying to pay back all your weekday sleep debt solely on weekends disrupts your biological clock.";
+            } else {
+                badge.className = "px-4 py-1.5 rounded-full text-xs font-extrabold bg-rose-500/15 text-rose-600 dark:text-rose-300 border border-rose-500/30";
+                badge.textContent = currentLang === 'ar' ? "خطر مرتفع (ديون متراكمة)" : "High Risk (Severe Debt)";
+                verdict.className = "text-xs sm:text-sm font-semibold text-rose-600 dark:text-rose-400 mt-0.5";
+                verdict.textContent = currentLang === 'ar'
+                    ? "تحذير: تراكم ديون النوم بهذا القدر يرفع خطر الغفوات المفاجئة والإجهاد المزمن!"
+                    : "Warning: Accumulating this much sleep debt spikes the risk of microsleeps, weight gain, and chronic exhaustion!";
+                advice.textContent = currentLang === 'ar'
+                    ? "النوم 5 ساعات فقط ليلاً يعني تراكم ساعتين من ديون النوم كل ليلة، مما يضاعف خطر الحوادث وأمراض القلب والسكري."
+                    : "Sleeping only 5 hours a night builds 2 hours of sleep debt every single night—raising the risk of accidents, diabetes, and heart disease.";
+            }
+        }
+
+        // ================= 2. BRAIN STAGE EXPLORER & EEG WAVE ANIMATION =================
+        function selectBrainStage(stage) {
+            currentBrainStage = stage;
+            const tabs = {
+                deep: document.getElementById('tabDeepSleep'),
+                rem: document.getElementById('tabRemSleep'),
+                myth: document.getElementById('tabOldMyth')
+            };
+
+            Object.keys(tabs).forEach(k => {
+                if (k === stage) {
+                    tabs[k].className = "py-3.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2.5 transition-all bg-indigo-600 text-white shadow-md";
+                } else {
+                    tabs[k].className = "py-3.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2.5 transition-all text-slate-600 dark:text-slate-300 hover:bg-white/50 dark:hover:bg-white/5";
+                }
+            });
+
+            const data = brainStagesData[stage][currentLang];
+            document.getElementById('eegLabel').textContent = data.eeg;
+            document.getElementById('brainStageStatus').textContent = data.status;
+            document.getElementById('brainFreqBadge').textContent = data.freq;
+            document.getElementById('stageBadge').textContent = data.badge;
+            document.getElementById('stageTitle').textContent = data.title;
+            document.getElementById('stageDesc').textContent = data.desc;
+
+            const pillarsContainer = document.getElementById('stagePillars');
+            pillarsContainer.innerHTML = data.pillars.map(p => `
+                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-night-800/80 border border-slate-200/70 dark:border-white/5 space-y-1.5">
+                    <div class="w-8 h-8 rounded-lg bg-indigo-500/15 text-indigo-500 dark:text-indigo-300 flex items-center justify-center text-sm">
+                        <i class="fa-solid ${p.icon}"></i>
+                    </div>
+                    <h4 class="font-bold text-sm text-slate-900 dark:text-white">${p.title}</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">${p.text}</p>
+                </div>
+            `).join('');
+        }
+
+        // Animated Brainwave Canvas
+        let wavePhase = 0;
+        function animateBrainWaves() {
+            const canvas = document.getElementById('brainWaveCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const rect = canvas.getBoundingClientRect();
+            if (canvas.width !== rect.width || canvas.height !== rect.height) {
+                canvas.width = rect.width;
+                canvas.height = rect.height;
+            }
+
+            const w = canvas.width;
+            const h = canvas.height;
+            ctx.clearRect(0, 0, w, h);
+
+            // Subtle Grid
+            ctx.strokeStyle = 'rgba(99, 102, 241, 0.12)';
+            ctx.lineWidth = 1;
+            for (let x = 0; x < w; x += 40) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, h);
+                ctx.stroke();
+            }
+            for (let y = 0; y < h; y += 35) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(w, y);
+                ctx.stroke();
+            }
+
+            // Draw Primary Wave based on currentBrainStage
+            ctx.beginPath();
+            ctx.lineWidth = 3;
+            if (currentBrainStage === 'deep') {
+                ctx.strokeStyle = '#818cf8';
+            } else if (currentBrainStage === 'rem') {
+                ctx.strokeStyle = '#fbbf24';
+            } else {
+                ctx.strokeStyle = '#f43f5e';
+            }
+
+            for (let x = 0; x < w; x++) {
+                let y = h / 2;
+                if (currentBrainStage === 'deep') {
+                    // Slow, high-amplitude Delta waves
+                    y += Math.sin((x * 0.022) + wavePhase) * (h * 0.30) + Math.sin((x * 0.05) - wavePhase * 0.5) * 10;
+                } else if (currentBrainStage === 'rem') {
+                    // Fast, complex REM dream waves
+                    y += Math.sin((x * 0.09) + wavePhase * 2.2) * (h * 0.16)
+                       + Math.cos((x * 0.18) - wavePhase * 3) * (h * 0.10)
+                       + Math.sin((x * 0.03) + wavePhase) * 8;
+                } else {
+                    // Myth comparison: show active pulses proving it's NOT flatline
+                    y += Math.sin((x * 0.06) + wavePhase * 1.6) * (h * 0.20) * Math.sin(x * 0.01 + wavePhase * 0.4);
+                }
+                if (x === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+
+            wavePhase += 0.045;
+            requestAnimationFrame(animateBrainWaves);
+        }
+
+        // ================= 3. TWO FORCES CONTROLLING SLEEP SIMULATOR =================
+        function toggleCaffeineDisruption() {
+            caffeineDisrupted = !caffeineDisrupted;
+            const badge = document.getElementById('caffeineStateBadge');
+            const btn = document.getElementById('caffeineToggleBtn');
+            if (caffeineDisrupted) {
+                badge.textContent = "ON";
+                badge.className = "px-2 py-0.5 rounded text-[11px] bg-rose-500 text-white font-bold";
+                btn.classList.add('border-rose-500');
+            } else {
+                badge.textContent = "OFF";
+                badge.className = "px-2 py-0.5 rounded text-[11px] bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300";
+                btn.classList.remove('border-rose-500');
+            }
+            updateForcesSimulator();
+        }
+
+        function formatHour(h) {
+            if (h === 24) return "12:00 AM";
+            if (h === 12) return "12:00 PM";
+            return h > 12 ? `${h - 12}:00 PM` : `${h}:00 AM`;
+        }
+
+        function updateForcesSimulator() {
+            const hour = parseInt(document.getElementById('timeOfDaySlider').value, 10);
+            document.getElementById('simClockDisplay').textContent = formatHour(hour);
+
+            const skyIcon = document.getElementById('timeSkyIcon');
+            if (hour >= 7 && hour < 18) {
+                skyIcon.className = "fa-solid fa-sun text-amber-400 text-lg";
+            } else if (hour >= 18 && hour < 20) {
+                skyIcon.className = "fa-solid fa-cloud-sun text-orange-400 text-lg";
+            } else {
+                skyIcon.className = "fa-solid fa-moon text-indigo-300 text-lg";
+            }
+
+            const hoursAwake = hour - 7;
+            // Sleep Pressure (0 to 100)
+            let pressure = Math.min(100, Math.round((hoursAwake / 16) * 95));
+            if (caffeineDisrupted && hour >= 17) {
+                pressure = Math.max(25, pressure - 35); // Caffeine masks sleep pressure
+            }
+
+            // Biological Clock Alertness (High during daylight, drops after 20:00 unless screen light disrupts it)
+            let alertness = 80;
+            if (hour < 10) alertness = 65 + (hour - 7) * 8;
+            else if (hour >= 10 && hour <= 18) alertness = 88;
+            else if (hour > 18 && hour <= 21) alertness = 88 - (hour - 18) * 16;
+            else alertness = 22;
+
+            if (caffeineDisrupted && hour >= 19) {
+                alertness = Math.min(85, alertness + 40); // Bright screens trick circadian clock
+            }
+
+            // Update Text Cards
+            const circVal = document.getElementById('circadianStatusVal');
+            const circDesc = document.getElementById('circadianDesc');
+            const pressVal = document.getElementById('pressureStatusVal');
+            const pressDesc = document.getElementById('pressureDesc');
+            const harmonyBox = document.getElementById('harmonyBox');
+            const harmonyTitle = document.getElementById('harmonyTitle');
+            const harmonyDesc = document.getElementById('harmonyDesc');
+
+            pressVal.textContent = currentLang === 'ar'
+                ? `${pressure}% (${hoursAwake} ساعة استيقاظ)`
+                : `${pressure}% (${hoursAwake}h awake)`;
+
+            if (alertness > 55) {
+                circVal.textContent = currentLang === 'ar' ? "إشارة يقظة ونشاط" : "Wakefulness Signal";
+                circDesc.textContent = currentLang === 'ar'
+                    ? (caffeineDisrupted && hour >= 20
+                        ? "بسبب إضاءة الشاشات والكافيين مساءً، تظن ساعتك البيولوجية أن النهار ما زال مستمراً!"
+                        : "ضوء النهار يرسل إشارة لدماغك للبقاء مستيقظاً ونشيطاً.")
+                    : (caffeineDisrupted && hour >= 20
+                        ? "Due to evening screens and caffeine, your biological clock is tricked into staying alert!"
+                        : "Daylight signals your biological clock to keep you awake and alert.");
+            } else {
+                circVal.textContent = currentLang === 'ar' ? "إفراز الميلاتونين (وقت النوم)" : "Melatonin Release (Sleep Time)";
+                circDesc.textContent = currentLang === 'ar'
+                    ? "حلول الظلام يهدئ الساعة البيولوجية ويفرز هرمون النوم الطبيعي."
+                    : "Darkness quiets the circadian alerting signal and releases natural melatonin.";
+            }
+
+            pressDesc.textContent = currentLang === 'ar'
+                ? (caffeineDisrupted && hour >= 17
+                    ? "الكافيين المسائي يحجب شعورك بضغط النوم فيؤخر دخولك في النوم العميق!"
+                    : "يتراكم ضغط النوم في الدماغ مع كل ساعة تقضيها مستيقظاً.")
+                : (caffeineDisrupted && hour >= 17
+                    ? "Late caffeine blocks adenosine receptors, masking your natural sleep pressure!"
+                    : "Sleep pressure builds steadily every hour from the moment you wake up.");
+
+            // Check if Sweet Spot (Harmony)
+            if (hour >= 21 && !caffeineDisrupted) {
+                harmonyBox.className = "p-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-800 dark:text-emerald-200";
+                harmonyTitle.textContent = currentLang === 'ar' ? "التناغم المثالي للنوم العميق! ★" : "The Sweet Spot for Deep Sleep! ★";
+                harmonyDesc.textContent = currentLang === 'ar'
+                    ? "الآن تتفق القوتان معاً: ضغط النوم في ذروته، والساعة البيولوجية في وضع الليل. هذه أفضل لحظة للنوم!"
+                    : "Both forces are now aligned: Sleep Pressure is high and your Biological Clock signals night. Ideal for deep sleep!";
+            } else if (caffeineDisrupted && hour >= 20) {
+                harmonyBox.className = "p-4 rounded-2xl bg-rose-500/15 border border-rose-500/30 text-rose-800 dark:text-rose-200";
+                harmonyTitle.textContent = currentLang === 'ar' ? "تعارض بين القوتين (أرق وصعوبة نوم)!" : "Forces Out of Sync (Insomnia Risk)!";
+                harmonyDesc.textContent = currentLang === 'ar'
+                    ? "الكافيين والشاشات قبل النوم عرقلا تناغم الساعة البيولوجية وضغط النوم، مما يسبب الأرق وتقطع النوم."
+                    : "Evening caffeine and screens disrupted the alignment between your clock and sleep drive, causing fragmented sleep.";
+            } else {
+                harmonyBox.className = "p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/25 text-indigo-900 dark:text-indigo-200";
+                harmonyTitle.textContent = currentLang === 'ar' ? "فترة اليقظة وبناء ضغط النوم" : "Daytime Wakefulness & Building Sleep Drive";
+                harmonyDesc.textContent = currentLang === 'ar'
+                    ? "خلال النهار تحافظ الساعة البيولوجية على نشاطك بينما يزداد ضغط النوم تدريجياً استعداداً للمساء."
+                    : "During the day, your biological clock keeps you alert while sleep pressure steadily builds for tonight.";
+            }
+
+            drawForcesChart(hour);
+        }
+
+        function drawForcesChart(selectedHour) {
+            const canvas = document.getElementById('forcesCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width || 600;
+            canvas.height = rect.height || 220;
+
+            const w = canvas.width;
+            const h = canvas.height;
+            const pad = 28;
+            ctx.clearRect(0, 0, w, h);
+
+            // Draw Sweet Spot Highlight Zone (21:00 to 24:00)
+            const x21 = pad + ((21 - 7) / 17) * (w - pad * 2);
+            if (!caffeineDisrupted) {
+                ctx.fillStyle = 'rgba(16, 185, 129, 0.14)';
+                ctx.fillRect(x21, 10, w - pad - x21, h - 30);
+            }
+
+            // Helper to map hour (7..24) and val (0..100)
+            const getX = (hr) => pad + ((hr - 7) / 17) * (w - pad * 2);
+            const getY = (val) => (h - 24) - (val / 100) * (h - 44);
+
+            // 1. Draw Circadian Alertness Curve (Amber)
+            ctx.beginPath();
+            ctx.strokeStyle = '#fbbf24';
+            ctx.lineWidth = 3;
+            for (let hr = 7; hr <= 24; hr += 0.5) {
+                let alertVal = 80;
+                if (hr < 10) alertVal = 65 + (hr - 7) * 8;
+                else if (hr <= 18) alertVal = 88;
+                else if (hr <= 21) alertVal = 88 - (hr - 18) * 16;
+                else alertVal = 22;
+                if (caffeineDisrupted && hr >= 19) alertVal = Math.min(85, alertVal + 38);
+
+                const x = getX(hr);
+                const y = getY(alertVal);
+                if (hr === 7) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+
+            // 2. Draw Sleep Pressure Curve (Indigo)
+            ctx.beginPath();
+            ctx.strokeStyle = '#818cf8';
+            ctx.lineWidth = 3;
+            for (let hr = 7; hr <= 24; hr += 0.5) {
+                let pVal = Math.min(96, ((hr - 7) / 16) * 95);
+                if (caffeineDisrupted && hr >= 17) pVal = Math.max(25, pVal - 32);
+                const x = getX(hr);
+                const y = getY(pVal);
+                if (hr === 7) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+
+            // 3. Draw Current Selected Time Marker Line
+            const curX = getX(selectedHour);
+            ctx.beginPath();
+            ctx.setLineDash([5, 5]);
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.moveTo(curX, 10);
+            ctx.lineTo(curX, h - 20);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Marker Dot
+            ctx.beginPath();
+            ctx.fillStyle = '#f59e0b';
+            ctx.arc(curX, 16, 5, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // ================= 4. SLEEP MYTHS FLIP CARDS =================
+        function answerMyth(cardNum, userChoseTrue) {
+            const card = document.getElementById(`mythCard${cardNum}`);
+            card.classList.add('rotate-y-180');
+            const badge = document.getElementById(`myth${cardNum}ResultBadge`);
+
+            // All 3 beliefs in the video are MYTHS (false)
+            const isCorrect = !userChoseTrue;
+            if (isCorrect) {
+                badge.className = "px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500/30 text-emerald-200 border border-emerald-400/40";
+                badge.textContent = currentLang === 'ar' ? "إجابة صحيحة! إنها خرافة ✓" : "Correct! It's a Myth ✓";
+            } else {
+                badge.className = "px-3 py-1 rounded-full text-xs font-extrabold bg-rose-500/30 text-rose-200 border border-rose-400/40";
+                badge.textContent = currentLang === 'ar' ? "انتبه: هذه خرافة خاطئة!" : "Careful: This is a Myth!";
+            }
+        }
+
+        function flipMythBack(cardNum) {
+            const card = document.getElementById(`mythCard${cardNum}`);
+            card.classList.remove('rotate-y-180');
+        }
+
+        // ================= 5. 6-STEP PRACTICAL SLEEP PLAN TRACKER =================
+        function toggleStep(stepNum) {
+            if (completedSteps.has(stepNum)) {
+                completedSteps.delete(stepNum);
+            } else {
+                completedSteps.add(stepNum);
+            }
+            updateReadinessScore();
+        }
+
+        function checkAllSteps() {
+            completedSteps = new Set([1, 2, 3, 4, 5, 6]);
+            updateReadinessScore();
+        }
+
+        function updateReadinessScore() {
+            for (let i = 1; i <= 6; i++) {
+                const card = document.getElementById(`stepCard${i}`);
+                const check = document.getElementById(`stepCheck${i}`);
+                if (completedSteps.has(i)) {
+                    card.className = "cursor-pointer group p-5 rounded-2xl bg-white dark:bg-night-900 border-2 border-indigo-500 bg-indigo-50/30 dark:bg-indigo-950/30 shadow-md transition-all select-none";
+                    check.className = "w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-sm transition";
+                } else {
+                    card.className = "cursor-pointer group p-5 rounded-2xl bg-white dark:bg-night-900 border-2 border-slate-200 dark:border-white/10 shadow-md transition-all select-none";
+                    check.className = "w-7 h-7 rounded-lg bg-slate-200 dark:bg-night-700 text-transparent flex items-center justify-center font-bold text-sm transition";
+                }
+            }
+
+            const count = completedSteps.size;
+            const pct = Math.round((count / 6) * 100);
+            document.getElementById('readinessScoreVal').textContent = pct + '%';
+            document.getElementById('readinessStepsCount').textContent = `${count} / 6`;
+
+            const circumference = 314;
+            const offset = circumference - (pct / 100) * circumference;
+            const circle = document.getElementById('scoreRingCircle');
+            circle.style.strokeDashoffset = offset;
+            circle.setAttribute('stroke', pct >= 80 ? '#10b981' : pct >= 50 ? '#6366f1' : '#f59e0b');
+
+            const feedback = document.getElementById('readinessFeedback');
+            if (count === 6) {
+                feedback.textContent = currentLang === 'ar'
+                    ? "ممتاز 100%! أنت تطبق خطة د. لورانس إبستين الكاملة لنوم عميق ومثالي الليلة."
+                    : "100% Perfect! You are following Dr. Epstein's complete 6-step plan for restorative sleep.";
+            } else if (count >= 4) {
+                feedback.textContent = currentLang === 'ar'
+                    ? "جاهزية عالية! أضف الخطوات المتبقية لتحقيق أقصى استفادة من النوم العميق."
+                    : "Great readiness! Complete the remaining habits for maximum deep sleep quality.";
+            } else {
+                feedback.textContent = currentLang === 'ar'
+                    ? "بداية جيدة! فعّل المزيد من الخطوات الـ 6 لتحسين جودة نومك الليلة."
+                    : "Good start! Check off more of the 6 steps to boost your sleep quality tonight.";
+            }
+        }
+
+        // ================= BONUS: RELAXATION BREATHING TOOL =================
+        function updateBreathingLabels() {
+            const btnText = document.getElementById('breathBtnText');
+            const phaseText = document.getElementById('breathPhaseText');
+            if (!isBreathing) {
+                btnText.textContent = currentLang === 'ar' ? "ابدأ التنفس" : "Start Breathing";
+                phaseText.textContent = currentLang === 'ar' ? "جاهز" : "Ready";
+            } else {
+                btnText.textContent = currentLang === 'ar' ? "إيقاف" : "Stop";
+            }
+        }
+
+        function toggleBreathingExercise() {
+            const orb = document.getElementById('breathOrb');
+            const phaseText = document.getElementById('breathPhaseText');
+            const btnText = document.getElementById('breathBtnText');
+
+            if (isBreathing) {
+                clearInterval(breathingInterval);
+                isBreathing = false;
+                orb.style.transform = 'scale(1)';
+                updateBreathingLabels();
+                return;
+            }
+
+            isBreathing = true;
+            btnText.textContent = currentLang === 'ar' ? "إيقاف" : "Stop";
+            let step = 0;
+
+            const runCycle = () => {
+                if (step % 3 === 0) {
+                    phaseText.textContent = currentLang === 'ar' ? "شهيق هادئ..." : "Inhale...";
+                    orb.style.transform = 'scale(1.38)';
+                } else if (step % 3 === 1) {
+                    phaseText.textContent = currentLang === 'ar' ? "احتفظ..." : "Hold...";
+                } else {
+                    phaseText.textContent = currentLang === 'ar' ? "زفير ببطء..." : "Exhale...";
+                    orb.style.transform = 'scale(0.92)';
+                }
+                step++;
+            };
+
+            runCycle();
+            breathingInterval = setInterval(runCycle, 3000);
+        }
+
+        // ================= STARFIELD BACKGROUND CANVAS =================
+        function initStarfield() {
+            const canvas = document.getElementById('starfieldCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let stars = [];
+
+            const resize = () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                stars = Array.from({ length: 75 }, () => ({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    r: Math.random() * 1.6 + 0.4,
+                    alpha: Math.random(),
+                    speed: Math.random() * 0.015 + 0.005
+                }));
+            };
+
+            window.addEventListener('resize', () => {
+                resize();
+                updateForcesSimulator();
+            });
+            resize();
+
+            function drawStars() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                stars.forEach(s => {
+                    s.alpha += s.speed;
+                    const a = (Math.sin(s.alpha) + 1) / 2 * 0.75 + 0.15;
+                    ctx.beginPath();
+                    ctx.fillStyle = `rgba(199, 210, 254, ${a})`;
+                    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                requestAnimationFrame(drawStars);
+            }
+            drawStars();
+        }
+
+        // Initialize Everything on Window Load
+        window.onload = function () {
+            initStarfield();
+            updateSleepDebt();
+            selectBrainStage('deep');
+            animateBrainWaves();
+            updateForcesSimulator();
+            updateReadinessScore();
+            updateBreathingLabels();
+        };
+    </script>
+</body>
+</html>
